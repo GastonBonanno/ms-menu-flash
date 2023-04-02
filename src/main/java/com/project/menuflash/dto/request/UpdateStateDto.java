@@ -1,10 +1,9 @@
-package com.project.menuflash.domain;
+package com.project.menuflash.dto.request;
 
 import lombok.Data;
 
 @Data
-public class StateDomain {
-
+public class UpdateStateDto {
     private Long id;
     private String name;
 }

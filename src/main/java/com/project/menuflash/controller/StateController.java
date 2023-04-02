@@ -1,7 +1,8 @@
 package com.project.menuflash.controller;
 
-import com.project.menuflash.domain.StateDomain;
-import com.project.menuflash.dto.StateDTO;
+import com.project.menuflash.dto.request.CreateStateDto;
+import com.project.menuflash.dto.request.UpdateStateDto;
+import com.project.menuflash.dto.response.UpdateStateResponseDto;
 import com.project.menuflash.service.state.StateService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,32 +14,49 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping(path="/state")
 public class StateController {
-    private StateService stateService;
+    private final StateService stateService;
+    private static final org.apache.logging.log4j.Logger LOG = org.apache.logging.log4j.LogManager.getLogger(StateController.class);
 
     public StateController(StateService stateService) {
         this.stateService = stateService;
     }
     @GetMapping
-    public ResponseEntity<List<StateDomain>> getStates() throws Exception {
-        List<StateDomain> response = stateService.getStates();
+    public ResponseEntity<List<UpdateStateResponseDto>> findAll() throws Exception {
+        LOG.info("FindAll begins");
+        List<UpdateStateResponseDto> response = stateService.getStates();
+        LOG.info("FindAll ends with response: {} ", response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<StateDomain> getStateById(@PathVariable Long id) throws Exception {
-        StateDomain response = stateService.getStateById(id);
+    public ResponseEntity<UpdateStateResponseDto> findOne(@PathVariable Long id) throws Exception {
+        LOG.info("FindOne begins with id: {}", id);
+        UpdateStateResponseDto response = stateService.getStateById(id);
+        LOG.info("FindOne ends with response: {} ", response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PatchMapping
-    public ResponseEntity<?> updateStates(@RequestBody StateDTO stateDto) throws Exception {
-        stateService.updateState(stateDto);
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody CreateStateDto createStateDTO) throws Exception {
+        LOG.info("Create begins with state: {}", createStateDTO);
+        stateService.createState(createStateDTO);
+        LOG.info("Create ends");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteState(@PathVariable Long id) throws Exception {
+    @PatchMapping
+    public ResponseEntity<?> update(@RequestBody UpdateStateDto updateStateDto) throws Exception {
+        LOG.info("Update begins with state: {}", updateStateDto);
+        stateService.updateState(updateStateDto);
+        LOG.info("Update ends");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) throws Exception {
+        LOG.info("Delete begins with id: {}", id);
         stateService.deleteState(id);
+        LOG.info("Delete ends");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

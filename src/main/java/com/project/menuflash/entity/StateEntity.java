@@ -21,6 +21,13 @@ public class StateEntity {
     private  Long id;
     private String name;
 
+    public StateEntity(String name) {
+        this.name = name;
+    }
+    public StateEntity() {
+
+    }
+
     public UpdateStateResponseDto toResponseDto(){
         UpdateStateResponseDto state = new UpdateStateResponseDto();
         state.setId(id);

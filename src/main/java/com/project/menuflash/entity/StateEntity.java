@@ -1,10 +1,8 @@
 package com.project.menuflash.entity;
 
 
-import com.project.menuflash.dto.request.CreateStateDto;
 import com.project.menuflash.dto.request.UpdateStateDto;
-import com.project.menuflash.dto.response.CreateStateResponseDto;
-import com.project.menuflash.dto.response.UpdateStateResponseDto;
+import com.project.menuflash.dto.response.GetStateResponseDto;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,17 +17,16 @@ public class StateEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
+
     private String name;
 
     public StateEntity(String name) {
         this.name = name;
     }
-    public StateEntity() {
+    public StateEntity() {}
 
-    }
-
-    public UpdateStateResponseDto toResponseDto(){
-        UpdateStateResponseDto state = new UpdateStateResponseDto();
+    public GetStateResponseDto toResponseDto(){
+        GetStateResponseDto state = new GetStateResponseDto();
         state.setId(id);
         state.setName(name);
         return state;

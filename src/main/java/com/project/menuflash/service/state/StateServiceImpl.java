@@ -3,7 +3,7 @@ package com.project.menuflash.service.state;
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.CreateStateDto;
 import com.project.menuflash.dto.request.UpdateStateDto;
-import com.project.menuflash.dto.response.GetStateResponseDto;
+import com.project.menuflash.dto.response.FindAllStateResponse;
 import com.project.menuflash.entity.StateEntity;
 import com.project.menuflash.repository.StateRepository;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class StateServiceImpl implements StateService{
         this.stateRepository = stateRepository;
     }
 
-    public List<GetStateResponseDto> getStates() throws ResponseStatusException {
+    public List<FindAllStateResponse> getStates() throws ResponseStatusException {
         try {
             List<StateEntity> stateEntities = stateRepository.findAll();
             return stateEntities.stream().map(StateEntity::toResponseDto).collect(Collectors.toList());
@@ -34,7 +34,7 @@ public class StateServiceImpl implements StateService{
         }
     }
 
-    public GetStateResponseDto getStateById(Long id) throws ResponseStatusException {
+    public FindAllStateResponse getStateById(Long id) throws ResponseStatusException {
         try {
             return getStateEntityById(id).toResponseDto();
         } catch (Exception e) {

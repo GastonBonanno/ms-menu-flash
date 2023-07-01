@@ -2,7 +2,7 @@ package com.project.menuflash.controller;
 
 import com.project.menuflash.dto.request.CreateStateDto;
 import com.project.menuflash.dto.request.UpdateStateDto;
-import com.project.menuflash.dto.response.GetStateResponseDto;
+import com.project.menuflash.dto.response.FindAllStateResponse;
 import com.project.menuflash.service.state.StateService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,17 +21,17 @@ public class StateController {
         this.stateService = stateService;
     }
     @GetMapping
-    public ResponseEntity<List<GetStateResponseDto>> findAll() throws Exception {
+    public ResponseEntity<List<FindAllStateResponse>> findAll() throws Exception {
         LOG.info("FindAll begins");
-        List<GetStateResponseDto> response = stateService.getStates();
+        List<FindAllStateResponse> response = stateService.getStates();
         LOG.info("FindAll ends with response: {} ", response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<GetStateResponseDto> findOne(@PathVariable Long id) throws Exception {
+    public ResponseEntity<FindAllStateResponse> findOne(@PathVariable Long id) throws Exception {
         LOG.info("FindOne begins with id: {}", id);
-        GetStateResponseDto response = stateService.getStateById(id);
+        FindAllStateResponse response = stateService.getStateById(id);
         LOG.info("FindOne ends with response: {} ", response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

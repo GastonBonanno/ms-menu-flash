@@ -2,7 +2,7 @@ package com.project.menuflash.entity;
 
 
 import com.project.menuflash.dto.request.UpdateStateDto;
-import com.project.menuflash.dto.response.GetStateResponseDto;
+import com.project.menuflash.dto.response.FindAllStateResponse;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -25,8 +25,8 @@ public class StateEntity {
     }
     public StateEntity() {}
 
-    public GetStateResponseDto toResponseDto(){
-        GetStateResponseDto state = new GetStateResponseDto();
+    public FindAllStateResponse toResponseDto(){
+        FindAllStateResponse state = new FindAllStateResponse();
         state.setId(id);
         state.setName(name);
         return state;

@@ -1,6 +1,7 @@
 package com.project.menuflash.service.company_menu;
 
 import com.project.menuflash.controller.StateController;
+import com.project.menuflash.dto.request.CreateCompanyMenuDto;
 import com.project.menuflash.dto.response.FindAllCompanyMenuResponse;
 import com.project.menuflash.entity.CompanyMenuEntity;
 import com.project.menuflash.repository.CompanyMenuRepository;
@@ -24,11 +25,22 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
 
     public List<FindAllCompanyMenuResponse> getCompanyMenu() throws ResponseStatusException {
         try {
-            List<CompanyMenuEntity> companyMenuEntities = companyMenuRepository.findAll();
+            List<CompanyMenuEntity> companyMenuEntities = companyMenuRepository.findByActive(Boolean.TRUE);
             return companyMenuEntities.stream().map(CompanyMenuEntity::toResponseDto).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("getCompanyMenu error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar menu de empresa", e);
         }
+    }
+
+    @Override
+    public void createMenu(CreateCompanyMenuDto companyMenuDto) throws Exception {
+        try {
+            companyMenuRepository.save(new CompanyMenuEntity());
+        } catch (Exception e) {
+            LOG.error("create menu error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear menu de empresa", e);
+        }
+
     }
 }

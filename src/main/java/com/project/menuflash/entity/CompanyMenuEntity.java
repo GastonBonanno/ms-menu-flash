@@ -40,6 +40,8 @@ public class CompanyMenuEntity {
     @OneToMany(mappedBy = "companyMenuEntity")
     private List<CategoryMenuEntity> categories;
 
+
+
     public FindAllCompanyMenuResponse toResponseDto(){
         FindAllCompanyMenuResponse companyMenu = new FindAllCompanyMenuResponse();
         companyMenu.setId(id);

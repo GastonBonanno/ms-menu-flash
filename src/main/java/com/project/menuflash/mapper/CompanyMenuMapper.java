@@ -8,9 +8,8 @@ import java.util.stream.Collectors;
 
 public abstract class CompanyMenuMapper {
 
-    public CompanyMenuEntity companyMenuDtoToEntity(CreateCompanyMenuDto companyMenuDto) {
+    public static CompanyMenuEntity dtoToEntity(CreateCompanyMenuDto companyMenuDto) {
         CompanyMenuEntity menuEntity = new CompanyMenuEntity();
-        menuEntity.setId(companyMenuDto.getId());
         menuEntity.setTitle(companyMenuDto.getTitle());
         menuEntity.setDescription(companyMenuDto.getDescription());
         menuEntity.setHeader(companyMenuDto.getHeader());

@@ -7,7 +7,6 @@ import java.util.List;
 
 @Data
 public class CreateCategoryMenuDto {
-    private Long id;
     private String name;
     private Boolean active;
     private List<CreateMenuItemDto> menuItems;

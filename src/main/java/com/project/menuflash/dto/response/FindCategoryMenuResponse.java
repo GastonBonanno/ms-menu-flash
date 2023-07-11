@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.util.List;
 @Data
-public class FindAllCategoryMenuResponse {
+public class FindCategoryMenuResponse {
     private Long id;
     private String name;
     private Boolean active;

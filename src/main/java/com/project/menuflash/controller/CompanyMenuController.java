@@ -1,14 +1,11 @@
 package com.project.menuflash.controller;
 
 import com.project.menuflash.dto.request.CreateCompanyMenuDto;
-import com.project.menuflash.dto.request.CreateStateDto;
-import com.project.menuflash.dto.response.FindAllCompanyMenuResponse;
+import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.service.company_menu.CompanyMenuService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -20,11 +17,11 @@ public class CompanyMenuController {
     public CompanyMenuController(CompanyMenuService companyMenuService) {
         this.companyMenuService = companyMenuService;
     }
-    @GetMapping
-    public ResponseEntity<List<FindAllCompanyMenuResponse>> findAll() throws Exception {
-        LOG.info("FindAll begins");
-        List<FindAllCompanyMenuResponse> response = companyMenuService.getCompanyMenu();
-        LOG.info("FindAll ends with response: {} ", response);
+    @GetMapping(value = "/{clientUserId}")
+    public ResponseEntity<FindCompanyMenuResponse> findByUserId(@PathVariable Long clientUserId) throws Exception {
+        LOG.info("FindByUserId begins");
+        FindCompanyMenuResponse response = companyMenuService.getCompanyMenu(clientUserId);
+        LOG.info("FindByUserId ends with response: {} ", response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

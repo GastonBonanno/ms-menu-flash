@@ -1,6 +1,5 @@
 package com.project.menuflash.dto.request;
 
-import com.project.menuflash.dto.response.FindAllMenuItemResponse;
 import lombok.Data;
 
 import java.util.List;
@@ -9,5 +8,6 @@ import java.util.List;
 public class CreateCategoryMenuDto {
     private String name;
     private Boolean active;
-    private List<CreateMenuItemDto> menuItems;
+    private Long companyMenuId;
+    private List<CreateItemMenuDto> menuItems;
 }

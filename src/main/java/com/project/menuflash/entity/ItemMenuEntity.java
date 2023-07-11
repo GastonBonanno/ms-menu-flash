@@ -1,5 +1,6 @@
 package com.project.menuflash.entity;
 
+
 import com.project.menuflash.dto.response.FindAllMenuItemResponse;
 import lombok.Data;
 
@@ -10,7 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name="menu_item")
 @Data
-public class MenuItemEntity {
+public class ItemMenuEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,19 +32,7 @@ public class MenuItemEntity {
     private Date deletedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_menu_id", insertable = false, updatable = false)
+    @JoinColumn(name = "category_menu_id")
     private CategoryMenuEntity categoryMenuEntity;
 
-    public FindAllMenuItemResponse toResponseDto(){
-        FindAllMenuItemResponse menuItem = new FindAllMenuItemResponse();
-        menuItem.setId(id);
-        menuItem.setName(name);
-        menuItem.setDescription(description);
-        menuItem.setPrice(price);
-        menuItem.setActive(active);
-        menuItem.setCreatedAt(createdAt);
-        menuItem.setModifiedAt(modifiedAt);
-        menuItem.setDeletedAt(deletedAt);
-        return menuItem;
-    }
 }

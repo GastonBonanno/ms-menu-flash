@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class CreateMenuItemDto {
+public class CreateItemMenuDto {
     private String name;
     private String description;
     private BigDecimal price;

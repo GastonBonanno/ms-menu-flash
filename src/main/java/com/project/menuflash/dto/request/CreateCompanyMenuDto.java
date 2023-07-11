@@ -1,6 +1,5 @@
 package com.project.menuflash.dto.request;
 
-import com.project.menuflash.dto.response.FindAllCategoryMenuResponse;
 import lombok.Data;
 
 import java.util.Date;

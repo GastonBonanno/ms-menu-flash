@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class FindAllCompanyMenuResponse {
+public class FindCompanyMenuResponse {
     private Long id;
     private String title;
     private String description;
@@ -17,7 +17,6 @@ public class FindAllCompanyMenuResponse {
     private Date createdAt;
     private Date modifiedAt;
     private Date deletedAt;
-
-    private List<FindAllCategoryMenuResponse> categories;
+    private List<FindCategoryMenuResponse> categories;
 }
 

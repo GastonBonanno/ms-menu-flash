@@ -20,6 +20,8 @@ public class CategoryMenuEntity {
 //    @Column(name = "company_menu_id")
 //    private Long companyMenuId;
 
+
+    //@JoinColumn(name = "company...", referencedColumnName = "company...")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_menu_id")
     private CompanyMenuEntity companyMenuEntity;

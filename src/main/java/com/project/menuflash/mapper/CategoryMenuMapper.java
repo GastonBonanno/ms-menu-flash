@@ -14,6 +14,7 @@ public class CategoryMenuMapper {
         CategoryMenuEntity menuCategory = new CategoryMenuEntity();
         menuCategory.setName(categoryMenuDto.getName());
         menuCategory.setActive(categoryMenuDto.getActive());
+        menuCategory.setMenuItems(categoryMenuDto.getMenuItems().stream().map());
         return menuCategory;
     }
 

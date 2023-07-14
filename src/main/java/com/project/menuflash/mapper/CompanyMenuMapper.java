@@ -2,7 +2,9 @@ package com.project.menuflash.mapper;
 
 
 import com.project.menuflash.dto.request.CreateCompanyMenuDto;
+import com.project.menuflash.dto.response.FindCategoryMenuResponse;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
+import com.project.menuflash.entity.CategoryMenuEntity;
 import com.project.menuflash.entity.CompanyMenuEntity;
 
 import java.util.stream.Collectors;
@@ -39,4 +41,11 @@ public class CompanyMenuMapper {
         return companyMenu;
     }
 
+    public static FindCategoryMenuResponse mapperToResponse(CategoryMenuEntity categoryMenuEntity){
+        FindCategoryMenuResponse findCategoryMenuResponse = new FindCategoryMenuResponse();
+        findCategoryMenuResponse.setId(categoryMenuEntity.getId());
+        findCategoryMenuResponse.setName(categoryMenuEntity.getName());
+        findCategoryMenuResponse.setActive(categoryMenuEntity.getActive());
+        return findCategoryMenuResponse;
+    }
 }

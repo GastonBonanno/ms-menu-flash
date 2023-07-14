@@ -15,28 +15,17 @@ public class ItemMenuServiceImpl implements ItemMenuService {
 
     private final ItemMenuRepository itemMenuRepository;
 
-
     public ItemMenuServiceImpl(ItemMenuRepository itemMenuRepository) {
         this.itemMenuRepository = itemMenuRepository;
     }
-
-//    public List<FindCategoryMenuResponse> getCompanyMenu() throws ResponseStatusException {
-//        try {
-//            List<CategoryMenuEntities> categoryMenuEntities = categoryMenuRepository.findByActiveAndId(Boolean.TRUE);
-//            return companyMenuEntities.stream().map(CompanyMenuMapper::entityToResponse).collect(Collectors.toList());
-//        } catch (Exception e) {
-//            LOG.error("getCompanyMenu error: {}", e.getMessage());
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar menu de empresa", e);
-//        }
-//    }
 
     @Override
     public void createItemMenu(CreateItemMenuDto itemMenuDto) throws Exception {
         try {
             itemMenuRepository.save(ItemMenuMapper.dtoToEntity(itemMenuDto));
         } catch (Exception e) {
-            LOG.error("create menu error: {}", e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear menu de empresa", e);
+            LOG.error("create item error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear item de categoría", e);
         }
     }
 }

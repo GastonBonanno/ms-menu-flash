@@ -1,7 +1,6 @@
 package com.project.menuflash.entity;
 
 
-import com.project.menuflash.dto.response.FindAllMenuItemResponse;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name="menu_item")
+@Table(name="item_menu")
 @Data
 public class ItemMenuEntity {
 
@@ -31,8 +30,7 @@ public class ItemMenuEntity {
     @Column(name="deleted_at")
     private Date deletedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_menu_id")
-    private CategoryMenuEntity categoryMenuEntity;
+    @Column(name = "category_menu_id")
+    private Long categoryMenuId;
 
 }

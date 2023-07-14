@@ -22,8 +22,8 @@ public class CompanyMenuEntity {
     private String footer;
     private Boolean active;
 
-    @Column(name = "client_user_id")
-    private Long clientUserId;
+    @Column(name = "company_data_id")
+    private Long companyDataId;
 
     @Column(name = "created_at")
     private Date createdAt;
@@ -33,7 +33,7 @@ public class CompanyMenuEntity {
     private Date deletedAt;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "companyMenuEntity")
+    @OneToMany(mappedBy = "companyMenuId")
     private List<CategoryMenuEntity> categories;
 
 }

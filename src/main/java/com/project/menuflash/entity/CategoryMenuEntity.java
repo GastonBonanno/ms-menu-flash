@@ -17,17 +17,15 @@ public class CategoryMenuEntity {
     private String name;
     private Boolean active;
 
-//    @Column(name = "company_menu_id")
-//    private Long companyMenuId;
+    @Column(name = "company_menu_id")
+    private Long companyMenuId;
 
-
-    //@JoinColumn(name = "company...", referencedColumnName = "company...")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_menu_id")
-    private CompanyMenuEntity companyMenuEntity;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "company_menu_id")
+//    private CompanyMenuEntity companyMenuEntity;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "categoryMenuEntity")
-    private List<ItemMenuEntity> menuItems;
+    @OneToMany(mappedBy = "categoryMenuId")
+    private List<ItemMenuEntity> itemsMenu;
 
 }

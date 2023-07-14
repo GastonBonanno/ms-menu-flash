@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CompanyMenuRepository extends JpaRepository<CompanyMenuEntity, Long> {
 
-    CompanyMenuEntity findByActiveAndClientUserId(Boolean aTrue, Long clientUserId);
+    CompanyMenuEntity findByActiveAndCompanyDataId(Boolean aTrue, Long companyDataId);
 }

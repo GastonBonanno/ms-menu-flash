@@ -20,28 +20,17 @@ public class CategoryMenuServiceImpl implements CategoryMenuService {
 
     private final CategoryMenuRepository categoryMenuRepository;
 
-
     public CategoryMenuServiceImpl(CategoryMenuRepository categoryMenuRepository) {
         this.categoryMenuRepository = categoryMenuRepository;
     }
-
-//    public List<FindCategoryMenuResponse> getCompanyMenu() throws ResponseStatusException {
-//        try {
-//            List<CategoryMenuEntities> categoryMenuEntities = categoryMenuRepository.findByActiveAndId(Boolean.TRUE);
-//            return companyMenuEntities.stream().map(CompanyMenuMapper::entityToResponse).collect(Collectors.toList());
-//        } catch (Exception e) {
-//            LOG.error("getCompanyMenu error: {}", e.getMessage());
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar menu de empresa", e);
-//        }
-//    }
 
     @Override
     public void createCategory(CreateCategoryMenuDto categoryMenuDto) throws Exception {
         try {
             categoryMenuRepository.save(CategoryMenuMapper.dtoToEntity(categoryMenuDto));
         } catch (Exception e) {
-            LOG.error("create menu error: {}", e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear menu de empresa", e);
+            LOG.error("create category error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear categoría de menú", e);
         }
     }
 }

@@ -16,13 +16,6 @@ public class CategoryMenuController {
     public CategoryMenuController(CategoryMenuService categoryMenuService) {
         this.categoryMenuService = categoryMenuService;
     }
-//    @GetMapping
-//    public ResponseEntity<List<FindCompanyMenuResponse>> findByCompanyMenuId() throws Exception {
-//        LOG.info("FindAll begins");
-//        List<FindCompanyMenuResponse> response = companyMenuService.getCompanyMenu();
-//        LOG.info("FindAll ends with response: {} ", response);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody CreateCategoryMenuDto createCategoryMenuDto) throws Exception {

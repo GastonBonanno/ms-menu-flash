@@ -7,6 +7,7 @@ import java.util.Date;
 
 @Data
 public class CreateItemMenuDto {
+    private Long categoryMenuId;
     private String name;
     private String description;
     private BigDecimal price;

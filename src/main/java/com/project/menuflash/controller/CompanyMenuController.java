@@ -17,10 +17,10 @@ public class CompanyMenuController {
     public CompanyMenuController(CompanyMenuService companyMenuService) {
         this.companyMenuService = companyMenuService;
     }
-    @GetMapping(value = "/{clientUserId}")
-    public ResponseEntity<FindCompanyMenuResponse> findByUserId(@PathVariable Long clientUserId) throws Exception {
+    @GetMapping(value = "/{companyDataId}")
+    public ResponseEntity<FindCompanyMenuResponse> findByUserId(@PathVariable Long companyDataId) throws Exception {
         LOG.info("FindByUserId begins");
-        FindCompanyMenuResponse response = companyMenuService.getCompanyMenu(clientUserId);
+        FindCompanyMenuResponse response = companyMenuService.getCompanyMenu(companyDataId);
         LOG.info("FindByUserId ends with response: {} ", response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

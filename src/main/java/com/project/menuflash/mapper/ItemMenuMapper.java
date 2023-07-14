@@ -7,18 +7,6 @@ import com.project.menuflash.entity.ItemMenuEntity;
 
 public class ItemMenuMapper {
 
-    public static ItemMenuEntity dtoToEntity(CreateItemMenuDto menuItemDto) {
-        ItemMenuEntity itemMenuEntity = new ItemMenuEntity();
-        itemMenuEntity.setName(menuItemDto.getName());
-        itemMenuEntity.setDescription(menuItemDto.getDescription());
-        itemMenuEntity.setPrice(menuItemDto.getPrice());
-        itemMenuEntity.setActive(menuItemDto.getActive());
-        itemMenuEntity.setCreatedAt(menuItemDto.getCreatedAt());
-        itemMenuEntity.setModifiedAt(menuItemDto.getModifiedAt());
-        itemMenuEntity.setDeletedAt(menuItemDto.getDeletedAt());
-        return itemMenuEntity;
-    }
-
     public static FindAllMenuItemResponse entityToResponse(ItemMenuEntity itemMenuEntity){
         FindAllMenuItemResponse itemMenu = new FindAllMenuItemResponse();
         itemMenu.setId(itemMenuEntity.getId());
@@ -30,5 +18,18 @@ public class ItemMenuMapper {
         itemMenu.setModifiedAt(itemMenuEntity.getModifiedAt());
         itemMenu.setDeletedAt(itemMenuEntity.getDeletedAt());
         return itemMenu;
+    }
+
+    public static ItemMenuEntity dtoToEntity(CreateItemMenuDto menuItemDto) {
+        ItemMenuEntity itemMenuEntity = new ItemMenuEntity();
+        itemMenuEntity.setCategoryMenuId(menuItemDto.getCategoryMenuId());
+        itemMenuEntity.setName(menuItemDto.getName());
+        itemMenuEntity.setDescription(menuItemDto.getDescription());
+        itemMenuEntity.setPrice(menuItemDto.getPrice());
+        itemMenuEntity.setActive(menuItemDto.getActive());
+        itemMenuEntity.setCreatedAt(menuItemDto.getCreatedAt());
+        itemMenuEntity.setModifiedAt(menuItemDto.getModifiedAt());
+        itemMenuEntity.setDeletedAt(menuItemDto.getDeletedAt());
+        return itemMenuEntity;
     }
 }

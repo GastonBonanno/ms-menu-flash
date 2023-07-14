@@ -11,7 +11,7 @@ public class CreateCompanyMenuDto {
     private String description;
     private String header;
     private String footer;
-    private Long clientUserId;
+    private Long companyDataId;
     private Boolean active;
     private Date createdAt;
     private Date modifiedAt;

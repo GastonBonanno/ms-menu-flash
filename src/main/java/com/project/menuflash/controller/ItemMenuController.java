@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
-@RequestMapping(path="/menu-item")
+@RequestMapping(path="/item-menu")
 public class ItemMenuController {
     private final ItemMenuService itemMenuService;
     private static final org.apache.logging.log4j.Logger LOG = org.apache.logging.log4j.LogManager.getLogger(ItemMenuController.class);
@@ -18,13 +18,6 @@ public class ItemMenuController {
     public ItemMenuController(ItemMenuService itemMenuService) {
         this.itemMenuService = itemMenuService;
     }
-//    @GetMapping
-//    public ResponseEntity<List<FindCompanyMenuResponse>> findAll() throws Exception {
-//        LOG.info("FindAll begins");
-//        List<FindCompanyMenuResponse> response = companyMenuService.getCompanyMenu();
-//        LOG.info("FindAll ends with response: {} ", response);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody CreateItemMenuDto createItemMenuDto) throws Exception {

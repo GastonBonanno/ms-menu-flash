@@ -28,4 +28,15 @@ public class ItemMenuServiceImpl implements ItemMenuService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear item de categoría", e);
         }
     }
+
+    @Override
+    public void deleteItem(Long id) throws Exception {
+        try {
+            itemMenuRepository.deleteById(id);
+        } catch (Exception e) {
+            LOG.error("deleteItem error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al borrar item", e);
+        }
+
+    }
 }

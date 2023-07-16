@@ -42,4 +42,15 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
         }
 
     }
+
+    @Override
+    public void deleteMenu(Long id) throws Exception {
+        try {
+            companyMenuRepository.deleteById(id);
+        } catch (Exception e) {
+            LOG.error("deleteMenu error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al borrar menu", e);
+        }
+
+    }
 }

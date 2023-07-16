@@ -6,4 +6,6 @@ public interface CategoryMenuService {
 //  List<FindAllCompanyMenuResponse> getCategoryMenu() throws Exception;
 
   void createCategory(CreateCategoryMenuDto createCategoryMenuDto) throws Exception;
+
+  void deleteCategory(Long id) throws Exception;
 }

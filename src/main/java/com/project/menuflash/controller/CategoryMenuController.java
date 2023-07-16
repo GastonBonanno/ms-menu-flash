@@ -25,4 +25,12 @@ public class CategoryMenuController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
+
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) throws Exception {
+        LOG.info("Delete begins with id: {}", id);
+        categoryMenuService.deleteCategory(id);
+        LOG.info("Delete ends");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

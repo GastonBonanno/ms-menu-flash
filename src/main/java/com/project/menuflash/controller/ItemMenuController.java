@@ -1,8 +1,6 @@
 package com.project.menuflash.controller;
 
-import com.project.menuflash.dto.request.CreateCompanyMenuDto;
 import com.project.menuflash.dto.request.CreateItemMenuDto;
-import com.project.menuflash.service.company_menu.CompanyMenuService;
 import com.project.menuflash.service.item_menu.ItemMenuService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,4 +24,14 @@ public class ItemMenuController {
         LOG.info("finished");
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) throws Exception {
+        LOG.info("Delete begins with id: {}", id);
+        itemMenuService.deleteItem(id);
+        LOG.info("Delete ends");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }

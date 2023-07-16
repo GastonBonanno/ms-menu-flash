@@ -2,16 +2,11 @@ package com.project.menuflash.service.category_menu;
 
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.CreateCategoryMenuDto;
-import com.project.menuflash.dto.response.FindCategoryMenuResponse;
 import com.project.menuflash.mapper.CategoryMenuMapper;
-import com.project.menuflash.mapper.CompanyMenuMapper;
 import com.project.menuflash.repository.CategoryMenuRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CategoryMenuServiceImpl implements CategoryMenuService {
@@ -31,6 +26,16 @@ public class CategoryMenuServiceImpl implements CategoryMenuService {
         } catch (Exception e) {
             LOG.error("create category error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear categoría de menú", e);
+        }
+    }
+
+    @Override
+    public void deleteCategory(Long id) throws Exception {
+        try {
+            categoryMenuRepository.deleteById(id);
+        } catch (Exception e) {
+            LOG.error("deleteCategory error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al borrar categoria", e);
         }
     }
 }

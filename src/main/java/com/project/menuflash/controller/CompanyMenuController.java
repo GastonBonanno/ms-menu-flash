@@ -32,4 +32,13 @@ public class CompanyMenuController {
         LOG.info("finished");
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping(value="/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) throws Exception {
+        LOG.info("Delete begins with id: {}", id);
+        companyMenuService.deleteMenu(id);
+        LOG.info("Delete ends");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

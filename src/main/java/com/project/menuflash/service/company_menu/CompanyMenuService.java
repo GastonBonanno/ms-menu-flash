@@ -7,4 +7,6 @@ public interface CompanyMenuService {
   FindCompanyMenuResponse getCompanyMenu(Long clientUserId) throws Exception;
 
   void createMenu(CreateCompanyMenuDto companyMenuDto) throws Exception;
+
+  void deleteMenu(Long id) throws Exception;
 }

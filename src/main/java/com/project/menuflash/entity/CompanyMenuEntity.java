@@ -33,7 +33,7 @@ public class CompanyMenuEntity {
     private Date deletedAt;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "companyMenuId")
+    @OneToMany(mappedBy = "companyMenuId",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CategoryMenuEntity> categories;
 
 }

@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
-public class CreateItemMenuDto {
-    private Long categoryMenuId;
+public class UpdateItemMenuDto {
+    private Long id;
     private String name;
     private String description;
     private BigDecimal price;
@@ -16,4 +16,6 @@ public class CreateItemMenuDto {
     private Date createdAt;
     private Date modifiedAt;
     private Date deletedAt;
+    private Long categoryMenuId;
+
 }

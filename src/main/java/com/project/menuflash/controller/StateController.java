@@ -44,10 +44,10 @@ public class StateController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping
-    public ResponseEntity<?> update(@RequestBody UpdateStateDto updateStateDto) throws Exception {
-        LOG.info("Update begins with state: {}", updateStateDto);
-        stateService.updateState(updateStateDto);
+    @PatchMapping(value="/{id}")
+      public ResponseEntity<?> update(@RequestBody UpdateStateDto updateStateDto,@PathVariable Long id) throws Exception {
+        LOG.info("Update begins with state: {} and with id: {}", updateStateDto,id);
+        stateService.updateState(updateStateDto,id);
         LOG.info("Update ends");
         return new ResponseEntity<>(HttpStatus.OK);
     }

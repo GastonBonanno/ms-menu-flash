@@ -52,9 +52,9 @@ public class StateServiceImpl implements StateService{
         }
     }
 
-    public void updateState(UpdateStateDto updateStateDto) throws ResponseStatusException {
+    public void updateState(UpdateStateDto updateStateDto,Long id) throws ResponseStatusException {
         try {
-            StateEntity stateEntity = getStateEntityById(updateStateDto.getId());
+            StateEntity stateEntity = getStateEntityById(id);
             stateRepository.save(stateEntity.updateFromDto(updateStateDto));
         } catch (Exception e) {
             LOG.error("updateState error: {}", e.getMessage());

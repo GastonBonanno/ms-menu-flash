@@ -1,6 +1,8 @@
 package com.project.menuflash.controller;
 
 import com.project.menuflash.dto.request.CreateItemMenuDto;
+import com.project.menuflash.dto.request.UpdateItemMenuDto;
+import com.project.menuflash.dto.request.UpdateStateDto;
 import com.project.menuflash.service.item_menu.ItemMenuService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,15 @@ public class ItemMenuController {
         LOG.info("finished");
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<?> update(@RequestBody UpdateItemMenuDto updateItemMenuDto, @PathVariable Long id) throws Exception {
+        LOG.info("Update begins with state: {} and with id: {}", updateItemMenuDto,id);
+        itemMenuService.updateItemMenu(updateItemMenuDto,id);
+        LOG.info("Update ends");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @DeleteMapping(value="/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) throws Exception {

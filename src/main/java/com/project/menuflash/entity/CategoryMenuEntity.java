@@ -25,7 +25,7 @@ public class CategoryMenuEntity {
 //    private CompanyMenuEntity companyMenuEntity;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "categoryMenuId")
+    @OneToMany(mappedBy = "categoryMenuId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemMenuEntity> itemsMenu;
 
 }

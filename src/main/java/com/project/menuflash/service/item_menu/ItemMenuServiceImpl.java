@@ -2,6 +2,10 @@ package com.project.menuflash.service.item_menu;
 
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.CreateItemMenuDto;
+import com.project.menuflash.dto.request.UpdateItemMenuDto;
+import com.project.menuflash.dto.request.UpdateStateDto;
+import com.project.menuflash.entity.ItemMenuEntity;
+import com.project.menuflash.entity.StateEntity;
 import com.project.menuflash.mapper.ItemMenuMapper;
 import com.project.menuflash.repository.ItemMenuRepository;
 import org.springframework.http.HttpStatus;
@@ -29,6 +33,18 @@ public class ItemMenuServiceImpl implements ItemMenuService {
         }
     }
 
+
+    public void updateItemMenu(UpdateItemMenuDto updateItemMenuDto, Long id) throws ResponseStatusException {
+        try {
+            ItemMenuEntity itemMenuEntity = getItemMenuEntityById(id);
+            itemMenuRepository.save(ItemMenuMapper.updateFromDto(updateItemMenuDto,itemMenuEntity));
+        } catch (Exception e) {
+            LOG.error("updateState error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar estado", e);
+        }
+    }
+
+
     @Override
     public void deleteItem(Long id) throws Exception {
         try {
@@ -38,5 +54,14 @@ public class ItemMenuServiceImpl implements ItemMenuService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al borrar item", e);
         }
 
+    }
+
+    private ItemMenuEntity getItemMenuEntityById(Long id) throws Exception {
+        try {
+            return itemMenuRepository.findById(id).orElse(null);
+        } catch (Exception e) {
+            LOG.error("getStateEntityById error: {}", e.getMessage());
+            throw new Exception();
+        }
     }
 }

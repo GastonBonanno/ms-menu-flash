@@ -11,7 +11,7 @@ public interface StateService {
 
   FindAllStateResponse getStateById(Long id) throws Exception;
 
-  void updateState(UpdateStateDto updateStateDto) throws Exception;
+  void updateState(UpdateStateDto updateStateDto, Long id) throws Exception;
 
   void deleteState(Long id) throws Exception;
 

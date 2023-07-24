@@ -1,6 +1,8 @@
 package com.project.menuflash.controller;
 
 import com.project.menuflash.dto.request.CreateCompanyMenuDto;
+import com.project.menuflash.dto.request.UpdateCategoryMenuDto;
+import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.service.company_menu.CompanyMenuService;
 import org.springframework.http.HttpStatus;
@@ -30,6 +32,14 @@ public class CompanyMenuController {
         LOG.info("Create begins");
         companyMenuService.createMenu(createCompanyMenuDto);
         LOG.info("finished");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<?> update(@RequestBody UpdateCompanyMenuDto updateCompanyMenuDto, @PathVariable Long id) throws Exception {
+        LOG.info("Update begins with state: {} and with id: {}", updateCompanyMenuDto,id);
+        companyMenuService.updateCompanyMenu(updateCompanyMenuDto,id);
+        LOG.info("Update ends");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

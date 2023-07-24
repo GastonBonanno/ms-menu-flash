@@ -2,8 +2,12 @@ package com.project.menuflash.service.company_menu;
 
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.CreateCompanyMenuDto;
+import com.project.menuflash.dto.request.UpdateCategoryMenuDto;
+import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
+import com.project.menuflash.entity.CategoryMenuEntity;
 import com.project.menuflash.entity.CompanyMenuEntity;
+import com.project.menuflash.mapper.CategoryMenuMapper;
 import com.project.menuflash.mapper.CompanyMenuMapper;
 import com.project.menuflash.repository.CompanyMenuRepository;
 import org.springframework.http.HttpStatus;
@@ -43,6 +47,16 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
 
     }
 
+    public void updateCompanyMenu(UpdateCompanyMenuDto updateCompanyMenuDto, Long id) throws ResponseStatusException {
+        try {
+            CompanyMenuEntity companyMenuEntity = getCompanyMenuEntityById(id);
+            companyMenuRepository.save(CompanyMenuMapper.updateFromDto(updateCompanyMenuDto,companyMenuEntity));
+        } catch (Exception e) {
+            LOG.error("updateCategory error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar categoría", e);
+        }
+    }
+
     @Override
     public void deleteMenu(Long id) throws Exception {
         try {
@@ -51,6 +65,14 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
             LOG.error("deleteMenu error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al borrar menu", e);
         }
+    }
 
+    private CompanyMenuEntity getCompanyMenuEntityById(Long id) throws Exception {
+        try {
+            return companyMenuRepository.findById(id).orElse(null);
+        } catch (Exception e) {
+            LOG.error("getCompanyMenuEntityById error: {}", e.getMessage());
+            throw new Exception();
+        }
     }
 }

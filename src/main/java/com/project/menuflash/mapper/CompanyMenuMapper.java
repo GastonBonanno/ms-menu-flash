@@ -2,9 +2,11 @@ package com.project.menuflash.mapper;
 
 
 import com.project.menuflash.dto.request.CreateCompanyMenuDto;
+import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.entity.CompanyMenuEntity;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CompanyMenuMapper {
@@ -37,5 +39,17 @@ public class CompanyMenuMapper {
         menuEntity.setModifiedAt(companyMenuDto.getModifiedAt());
         menuEntity.setDeletedAt(companyMenuDto.getDeletedAt());
         return menuEntity;
+    }
+
+    public static CompanyMenuEntity updateFromDto(UpdateCompanyMenuDto dto, CompanyMenuEntity companyMenuEntity) {
+        companyMenuEntity.setTitle(Optional.ofNullable(dto.getTitle()).orElse(companyMenuEntity.getTitle()));
+        companyMenuEntity.setDescription(Optional.ofNullable(dto.getDescription()).orElse(companyMenuEntity.getDescription()));
+        companyMenuEntity.setHeader(Optional.ofNullable(dto.getHeader()).orElse(companyMenuEntity.getHeader()));
+        companyMenuEntity.setFooter(Optional.ofNullable(dto.getFooter()).orElse(companyMenuEntity.getFooter()));
+        companyMenuEntity.setCreatedAt(Optional.ofNullable(dto.getCreatedAt()).orElse(companyMenuEntity.getCreatedAt()));
+        companyMenuEntity.setModifiedAt(Optional.ofNullable(dto.getModifiedAt()).orElse(companyMenuEntity.getModifiedAt()));
+        companyMenuEntity.setDeletedAt(Optional.ofNullable(dto.getDeletedAt()).orElse(companyMenuEntity.getDeletedAt()));
+        companyMenuEntity.setActive(Optional.ofNullable(dto.getActive()).orElse(companyMenuEntity.getActive()));
+        return companyMenuEntity;
     }
 }

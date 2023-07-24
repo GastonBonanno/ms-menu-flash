@@ -43,6 +43,4 @@ public class ItemMenuController {
         LOG.info("Delete ends");
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 }

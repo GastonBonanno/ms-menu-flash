@@ -2,9 +2,13 @@ package com.project.menuflash.mapper;
 
 
 import com.project.menuflash.dto.request.CreateCategoryMenuDto;
+import com.project.menuflash.dto.request.UpdateCategoryMenuDto;
+import com.project.menuflash.dto.request.UpdateItemMenuDto;
 import com.project.menuflash.dto.response.FindCategoryMenuResponse;
 import com.project.menuflash.entity.CategoryMenuEntity;
+import com.project.menuflash.entity.ItemMenuEntity;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CategoryMenuMapper {
@@ -24,5 +28,11 @@ public class CategoryMenuMapper {
         menuCategory.setActive(categoryMenuDto.getActive());
         menuCategory.setCompanyMenuId(categoryMenuDto.getCompanyMenuId());
         return menuCategory;
+    }
+
+    public static CategoryMenuEntity updateFromDto(UpdateCategoryMenuDto dto, CategoryMenuEntity categoryMenuEntity) {
+        categoryMenuEntity.setName(Optional.ofNullable(dto.getName()).orElse(categoryMenuEntity.getName()));
+        categoryMenuEntity.setActive(Optional.ofNullable(dto.getActive()).orElse(categoryMenuEntity.getActive()));
+        return categoryMenuEntity;
     }
 }

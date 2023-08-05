@@ -20,10 +20,6 @@ public class CategoryMenuEntity {
     @Column(name = "company_menu_id")
     private Long companyMenuId;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "company_menu_id")
-//    private CompanyMenuEntity companyMenuEntity;
-
     @JsonIgnore
     @OneToMany(mappedBy = "categoryMenuId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemMenuEntity> itemsMenu;

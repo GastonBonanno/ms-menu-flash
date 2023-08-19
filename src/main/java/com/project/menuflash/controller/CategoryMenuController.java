@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin
 @RequestMapping(path="/category-menu")
@@ -20,9 +22,9 @@ public class CategoryMenuController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody CreateCategoryMenuDto createCategoryMenuDto) throws Exception {
+    public ResponseEntity<?> create(@RequestBody List<CreateCategoryMenuDto> listCreateCategoryMenuDto) throws Exception {
         LOG.info("Create begins");
-        categoryMenuService.createCategory(createCategoryMenuDto);
+        categoryMenuService.createCategory(listCreateCategoryMenuDto);
         LOG.info("finished");
         return new ResponseEntity<>(HttpStatus.OK);
 

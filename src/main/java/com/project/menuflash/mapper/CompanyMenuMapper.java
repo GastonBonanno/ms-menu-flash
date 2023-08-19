@@ -3,6 +3,7 @@ package com.project.menuflash.mapper;
 
 import com.project.menuflash.dto.request.CreateCompanyMenuDto;
 import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
+import com.project.menuflash.dto.response.CreateCompanyMenuResponse;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.entity.CompanyMenuEntity;
 
@@ -25,6 +26,21 @@ public class CompanyMenuMapper {
         findCompanyMenuResponse.setDeletedAt(companyMenuEntity.getDeletedAt());
         findCompanyMenuResponse.setCategories(companyMenuEntity.getCategories().stream().map(CategoryMenuMapper::entityToResponse).collect(Collectors.toList()));
         return findCompanyMenuResponse;
+    }
+
+    public static CreateCompanyMenuResponse entityToResponse(CompanyMenuEntity companyMenuEntity){
+        CreateCompanyMenuResponse createCompanyMenuResponse = new CreateCompanyMenuResponse();
+        createCompanyMenuResponse.setId(companyMenuEntity.getId());
+        createCompanyMenuResponse.setTitle(companyMenuEntity.getTitle());
+        createCompanyMenuResponse.setDescription(companyMenuEntity.getDescription());
+        createCompanyMenuResponse.setHeader(companyMenuEntity.getHeader());
+        createCompanyMenuResponse.setFooter(companyMenuEntity.getFooter());
+        createCompanyMenuResponse.setCompanyDataId(companyMenuEntity.getCompanyDataId());
+        createCompanyMenuResponse.setActive(companyMenuEntity.getActive());
+        createCompanyMenuResponse.setCreatedAt(companyMenuEntity.getCreatedAt());
+        createCompanyMenuResponse.setModifiedAt(companyMenuEntity.getModifiedAt());
+        createCompanyMenuResponse.setDeletedAt(companyMenuEntity.getDeletedAt());
+        return createCompanyMenuResponse;
     }
 
     public static CompanyMenuEntity dtoToEntity(CreateCompanyMenuDto companyMenuDto) {

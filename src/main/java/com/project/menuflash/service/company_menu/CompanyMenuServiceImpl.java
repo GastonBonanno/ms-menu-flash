@@ -4,6 +4,7 @@ import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.CreateCompanyMenuDto;
 import com.project.menuflash.dto.request.UpdateCategoryMenuDto;
 import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
+import com.project.menuflash.dto.response.CreateCompanyMenuResponse;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.entity.CategoryMenuEntity;
 import com.project.menuflash.entity.CompanyMenuEntity;
@@ -13,6 +14,8 @@ import com.project.menuflash.repository.CompanyMenuRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Date;
 
 @Service
 public class CompanyMenuServiceImpl implements CompanyMenuService {
@@ -37,9 +40,12 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
     }
 
     @Override
-    public void createMenu(CreateCompanyMenuDto companyMenuDto) throws Exception {
+    public CreateCompanyMenuResponse createMenu(CreateCompanyMenuDto companyMenuDto) throws Exception {
         try {
-            companyMenuRepository.save(CompanyMenuMapper.dtoToEntity(companyMenuDto));
+            companyMenuDto.setActive(Boolean.TRUE);
+            companyMenuDto.setCreatedAt(new Date());
+            CompanyMenuEntity companyMenuEntity = companyMenuRepository.save(CompanyMenuMapper.dtoToEntity(companyMenuDto));
+            return CompanyMenuMapper.entityToResponse(companyMenuEntity);
         } catch (Exception e) {
             LOG.error("create menu error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear menu de empresa", e);

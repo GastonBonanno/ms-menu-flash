@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryMenuServiceImpl implements CategoryMenuService {
@@ -27,9 +29,10 @@ public class CategoryMenuServiceImpl implements CategoryMenuService {
     }
 
     @Override
-    public void createCategory(CreateCategoryMenuDto categoryMenuDto) throws Exception {
+    public void createCategory(List<CreateCategoryMenuDto> listCategoryMenuDto) throws Exception {
         try {
-            categoryMenuRepository.save(CategoryMenuMapper.dtoToEntity(categoryMenuDto));
+            List<CategoryMenuEntity> categoryMenuEntities = listCategoryMenuDto.stream().map(CategoryMenuMapper::dtoToEntity).collect(Collectors.toList());
+            categoryMenuRepository.saveAll(categoryMenuEntities);
         } catch (Exception e) {
             LOG.error("create category error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear categoría de menú", e);

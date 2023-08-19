@@ -3,6 +3,7 @@ package com.project.menuflash.controller;
 import com.project.menuflash.dto.request.CreateCompanyMenuDto;
 import com.project.menuflash.dto.request.UpdateCategoryMenuDto;
 import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
+import com.project.menuflash.dto.response.CreateCompanyMenuResponse;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.service.company_menu.CompanyMenuService;
 import org.springframework.http.HttpStatus;
@@ -28,11 +29,11 @@ public class CompanyMenuController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody CreateCompanyMenuDto createCompanyMenuDto) throws Exception {
+    public ResponseEntity<CreateCompanyMenuResponse> create(@RequestBody CreateCompanyMenuDto createCompanyMenuDto) throws Exception {
         LOG.info("Create begins");
-        companyMenuService.createMenu(createCompanyMenuDto);
+        CreateCompanyMenuResponse createCompanyMenuResponse = companyMenuService.createMenu(createCompanyMenuDto);
         LOG.info("finished");
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(createCompanyMenuResponse, HttpStatus.OK);
     }
 
     @PatchMapping(value = "/{id}")

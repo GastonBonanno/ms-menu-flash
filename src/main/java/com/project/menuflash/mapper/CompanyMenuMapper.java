@@ -27,7 +27,6 @@ public class CompanyMenuMapper {
         findCompanyMenuResponse.setCategories(companyMenuEntity.getCategories().stream().map(CategoryMenuMapper::entityToResponse).collect(Collectors.toList()));
         return findCompanyMenuResponse;
     }
-
     public static CreateCompanyMenuResponse entityToResponse(CompanyMenuEntity companyMenuEntity){
         CreateCompanyMenuResponse createCompanyMenuResponse = new CreateCompanyMenuResponse();
         createCompanyMenuResponse.setId(companyMenuEntity.getId());
@@ -42,6 +41,7 @@ public class CompanyMenuMapper {
         createCompanyMenuResponse.setDeletedAt(companyMenuEntity.getDeletedAt());
         return createCompanyMenuResponse;
     }
+
 
     public static CompanyMenuEntity dtoToEntity(CreateCompanyMenuDto companyMenuDto) {
         CompanyMenuEntity menuEntity = new CompanyMenuEntity();

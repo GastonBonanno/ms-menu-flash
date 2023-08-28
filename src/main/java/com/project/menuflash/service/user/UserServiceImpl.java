@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
     public LoginUserResponse loginUser(LoginUserDto loginUserDto) throws ResponseStatusException {
         try {
             ClientUserEntity clientUserEntity = userRepository.findByEmail(loginUserDto.getEmail());
-//            System.out.println("clientUserEntity: " + clientUserEntity);
             validateUserAndPassword(loginUserDto.getPassword(), clientUserEntity);
             LoginUserResponse loginUserResponse = UserMapper.entityToResponse(clientUserEntity);
             loginUserResponse.setToken(tokenService.getJwtToken(loginUserResponse.getUser()));
@@ -49,6 +48,13 @@ public class UserServiceImpl implements UserService {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
         if(clientUserEntity.getPassword() != null && !bCryptPasswordEncoder.matches(pass, clientUserEntity.getPassword()))
             throw new Exception(errorMessage);
+    }
+
+    public LoginUserResponse validateToken(String authToken) throws Exception {
+        LoginUserResponse loginUserResponse = new LoginUserResponse();
+        loginUserResponse.setUser(tokenService.getUserFromToken(authToken));
+        loginUserResponse.setToken(authToken);
+        return loginUserResponse;
     }
 
 

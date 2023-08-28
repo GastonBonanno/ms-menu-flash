@@ -50,7 +50,6 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
             LOG.error("create menu error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear menu de empresa", e);
         }
-
     }
 
     public void updateCompanyMenu(UpdateCompanyMenuDto updateCompanyMenuDto, Long id) throws ResponseStatusException {

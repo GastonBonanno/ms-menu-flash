@@ -16,7 +16,5 @@ public class CreateCompanyMenuDto {
     private Date createdAt;
     private Date modifiedAt;
     private Date deletedAt;
-
-    private List<CreateCategoryMenuDto> categories;
 }
 

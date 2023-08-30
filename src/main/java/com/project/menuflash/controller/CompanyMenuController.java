@@ -6,9 +6,12 @@ import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
 import com.project.menuflash.dto.response.CreateCompanyMenuResponse;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.service.company_menu.CompanyMenuService;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -20,12 +23,21 @@ public class CompanyMenuController {
     public CompanyMenuController(CompanyMenuService companyMenuService) {
         this.companyMenuService = companyMenuService;
     }
-    @GetMapping(value = "/{companyDataId}")
-    public ResponseEntity<FindCompanyMenuResponse> findByUserId(@PathVariable Long companyDataId) throws Exception {
+//    @GetMapping(value = "/{companyDataId}")
+//    public ResponseEntity<FindCompanyMenuResponse> findByCompanyIdAndMenuId(@PathVariable Long companyDataId) throws Exception {
+//        LOG.info("FindByUserId begins");
+//        FindCompanyMenuResponse response = companyMenuService.getCompanyMenu(companyDataId);
+//        LOG.info("FindByUserId ends with response: {} ", response);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+
+    @GetMapping(value = "")
+    public ResponseEntity<List<FindCompanyMenuResponse>> findByCompanyId(HttpEntity<byte[]> requestEntity) throws Exception {
         LOG.info("FindByUserId begins");
-        FindCompanyMenuResponse response = companyMenuService.getCompanyMenu(companyDataId);
-        LOG.info("FindByUserId ends with response: {} ", response);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        String authToken = requestEntity.getHeaders().getFirst("auth-token");
+        List<FindCompanyMenuResponse> listResponse = companyMenuService.getCompanyMenu(authToken);
+        LOG.info("FindByUserId ends with response: {} ", listResponse);
+        return new ResponseEntity<>(listResponse, HttpStatus.OK);
     }
 
     @PostMapping

@@ -1,7 +1,7 @@
 package com.project.menuflash.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.menuflash.dto.response.LoginUser;
+import com.project.menuflash.dto.response.LoggedUser;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.crypto.DefaultJwtSignatureValidator;
 import org.springframework.stereotype.Component;
@@ -13,13 +13,13 @@ import java.util.Date;
 @Component
 public class TokenService {
 
-    private final String ttl = "1500000";
+    private final String ttl = "15000000";
     private static final String SEED = "seedTokenGenerator";
     private static final String USER_CLAIM = "user";
 
     private static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
 
-    public String getJwtToken(LoginUser user) {
+    public String getJwtToken(LoggedUser user) {
 
         String jwtToken = null;
         try {
@@ -31,17 +31,17 @@ public class TokenService {
         return jwtToken;
     }
 
-    public LoginUser getUserFromToken(String token) throws Exception {
+    public LoggedUser getUserFromToken(String token) throws Exception {
         verifyToken(token);
 
-        LoginUser user = null;
+        LoggedUser user = null;
         try {
             Claims claims = Jwts.parser()
                     .setSigningKey(Base64.getDecoder().decode(SEED))
                     .parseClaimsJws(token)
                     .getBody();
             final ObjectMapper mapper = new ObjectMapper();
-            user = mapper.convertValue(claims.get(USER_CLAIM), LoginUser.class);
+            user = mapper.convertValue(claims.get(USER_CLAIM), LoggedUser.class);
 
         } catch (ExpiredJwtException e) {
             throw new Exception("Token expired");
@@ -52,7 +52,7 @@ public class TokenService {
         return user;
     }
 
-    private String createJWTAndSign(LoginUser user) throws Exception {
+    private String createJWTAndSign(LoggedUser user) throws Exception {
         JwtBuilder builder = Jwts.builder()
                 .claim(USER_CLAIM, user)
                 .signWith(SIGNATURE_ALGORITHM, Base64.getDecoder().decode(SEED))

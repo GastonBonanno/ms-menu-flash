@@ -6,6 +6,7 @@ import com.project.menuflash.dto.request.UpdateItemMenuDto;
 import com.project.menuflash.dto.response.LoginUserResponse;
 import com.project.menuflash.service.item_menu.ItemMenuService;
 import com.project.menuflash.service.user.UserService;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,13 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/validate-token")
+    public ResponseEntity<LoginUserResponse> validateToken(HttpEntity<byte[]> requestEntity) throws Exception {
+        LOG.info("validateToken begins");
+        String authToken = requestEntity.getHeaders().getFirst("auth-token");
+        LoginUserResponse response = userService.validateToken(authToken);
+        LOG.info("Finished validateToken");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

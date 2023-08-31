@@ -2,20 +2,23 @@ package com.project.menuflash.service.company_menu;
 
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.CreateCompanyMenuDto;
-import com.project.menuflash.dto.request.UpdateCategoryMenuDto;
 import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
 import com.project.menuflash.dto.response.CreateCompanyMenuResponse;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
-import com.project.menuflash.entity.CategoryMenuEntity;
+import com.project.menuflash.dto.response.LoggedUser;
+import com.project.menuflash.entity.CompanyDataEntity;
 import com.project.menuflash.entity.CompanyMenuEntity;
-import com.project.menuflash.mapper.CategoryMenuMapper;
+import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.CompanyMenuMapper;
+import com.project.menuflash.repository.CompanyDataRepository;
 import com.project.menuflash.repository.CompanyMenuRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyMenuServiceImpl implements CompanyMenuService {
@@ -23,16 +26,19 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
     private static final org.apache.logging.log4j.Logger LOG = org.apache.logging.log4j.LogManager.getLogger(StateController.class);
 
     private final CompanyMenuRepository companyMenuRepository;
+    private final TokenService tokenService;
 
 
-    public CompanyMenuServiceImpl(CompanyMenuRepository companyMenuRepository) {
+    public CompanyMenuServiceImpl(CompanyMenuRepository companyMenuRepository, CompanyDataRepository companyDataRepository, TokenService tokenService) {
         this.companyMenuRepository = companyMenuRepository;
+        this.tokenService = tokenService;
     }
 
-    public FindCompanyMenuResponse getCompanyMenu(Long companyDataId) throws ResponseStatusException {
+    public List<FindCompanyMenuResponse> getCompanyMenu(String authToken) throws ResponseStatusException {
         try {
-            CompanyMenuEntity companyMenuEntities = companyMenuRepository.findByActiveAndCompanyDataId(Boolean.TRUE,companyDataId);
-            return CompanyMenuMapper.companyMenuEntityToFindCompanyMenuResponse(companyMenuEntities);
+            LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
+            List<CompanyMenuEntity> listCompanyMenuEntities = companyMenuRepository.findByActiveAndCompanyDataId(Boolean.TRUE, loggedUser.getCompanyId());
+            return listCompanyMenuEntities.stream().map(CompanyMenuMapper::companyMenuEntityToFindCompanyMenuResponse).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("getCompanyMenu error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar menu de empresa", e);
@@ -50,7 +56,6 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
             LOG.error("create menu error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear menu de empresa", e);
         }
-
     }
 
     public void updateCompanyMenu(UpdateCompanyMenuDto updateCompanyMenuDto, Long id) throws ResponseStatusException {
@@ -81,4 +86,6 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
             throw new Exception();
         }
     }
+
+
 }

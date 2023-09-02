@@ -32,18 +32,19 @@ public class CompanyMenuController {
 //    }
 
     @GetMapping(value = "")
-    public ResponseEntity<List<FindCompanyMenuResponse>> findByCompanyId(HttpEntity<byte[]> requestEntity) throws Exception {
+    public ResponseEntity<List<FindCompanyMenuResponse>> findByCompanyId(@RequestHeader("auth-token") String authToken) throws Exception {
         LOG.info("FindByUserId begins");
-        String authToken = requestEntity.getHeaders().getFirst("auth-token");
+//        String authToken = requestEntity.getHeaders().getFirst("auth-token");
         List<FindCompanyMenuResponse> listResponse = companyMenuService.getCompanyMenu(authToken);
         LOG.info("FindByUserId ends with response: {} ", listResponse);
         return new ResponseEntity<>(listResponse, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<CreateCompanyMenuResponse> create(@RequestBody CreateCompanyMenuDto createCompanyMenuDto) throws Exception {
+    public ResponseEntity<CreateCompanyMenuResponse> create(@RequestBody CreateCompanyMenuDto createCompanyMenuDto,
+                                                            @RequestHeader("auth-token") String authToken) throws Exception {
         LOG.info("Create begins");
-        CreateCompanyMenuResponse createCompanyMenuResponse = companyMenuService.createMenu(createCompanyMenuDto);
+        CreateCompanyMenuResponse createCompanyMenuResponse = companyMenuService.createMenu(createCompanyMenuDto, authToken);
         LOG.info("finished");
         return new ResponseEntity<>(createCompanyMenuResponse, HttpStatus.OK);
     }

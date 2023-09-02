@@ -50,12 +50,14 @@ public class UserServiceImpl implements UserService {
             throw new Exception(errorMessage);
     }
 
-    public LoginUserResponse validateToken(String authToken) throws Exception {
-        LoginUserResponse loginUserResponse = new LoginUserResponse();
-        loginUserResponse.setUser(tokenService.getUserFromToken(authToken));
-        loginUserResponse.setToken(authToken);
-        return loginUserResponse;
+    public Boolean validateToken(String authToken) throws ResponseStatusException {
+        try {
+            tokenService.getUserFromToken(authToken);
+            return Boolean.TRUE;
+        } catch (Exception e) {
+            LOG.error("validateToken error: {}", e.getMessage());
+        }
+        return Boolean.FALSE;
     }
-
 
 }

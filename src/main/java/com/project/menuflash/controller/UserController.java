@@ -31,10 +31,9 @@ public class UserController {
     }
 
     @GetMapping(path = "/validate-token")
-    public ResponseEntity<LoginUserResponse> validateToken(HttpEntity<byte[]> requestEntity) throws Exception {
+    public ResponseEntity<Boolean> validateToken(@RequestHeader("auth-token") String authToken) throws Exception {
         LOG.info("validateToken begins");
-        String authToken = requestEntity.getHeaders().getFirst("auth-token");
-        LoginUserResponse response = userService.validateToken(authToken);
+        Boolean response = userService.validateToken(authToken);
         LOG.info("Finished validateToken");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

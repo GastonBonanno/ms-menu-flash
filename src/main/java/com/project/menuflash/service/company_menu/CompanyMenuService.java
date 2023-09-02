@@ -10,7 +10,7 @@ import java.util.List;
 public interface CompanyMenuService {
   List<FindCompanyMenuResponse> getCompanyMenu(String authToken) throws Exception;
 
-  CreateCompanyMenuResponse createMenu(CreateCompanyMenuDto companyMenuDto) throws Exception;
+  CreateCompanyMenuResponse createMenu(CreateCompanyMenuDto companyMenuDto, String authToken) throws Exception;
 
   void deleteMenu(Long id) throws Exception;
 

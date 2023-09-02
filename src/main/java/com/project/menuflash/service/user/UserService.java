@@ -12,6 +12,6 @@ import java.util.List;
 public interface UserService {
   LoginUserResponse loginUser(LoginUserDto loginUserDto) throws ResponseStatusException;
 
-  LoginUserResponse validateToken(String authToken) throws Exception;
+  Boolean validateToken(String authToken) throws Exception;
 
 }

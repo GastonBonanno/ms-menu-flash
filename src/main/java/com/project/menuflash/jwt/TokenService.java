@@ -32,10 +32,10 @@ public class TokenService {
     }
 
     public LoggedUser getUserFromToken(String token) throws Exception {
-        verifyToken(token);
-
         LoggedUser user = null;
         try {
+            verifyToken(token);
+
             Claims claims = Jwts.parser()
                     .setSigningKey(Base64.getDecoder().decode(SEED))
                     .parseClaimsJws(token)

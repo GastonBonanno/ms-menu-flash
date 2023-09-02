@@ -46,10 +46,12 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
     }
 
     @Override
-    public CreateCompanyMenuResponse createMenu(CreateCompanyMenuDto companyMenuDto) throws Exception {
+    public CreateCompanyMenuResponse createMenu(CreateCompanyMenuDto companyMenuDto, String authToken) throws Exception {
         try {
+            LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
             companyMenuDto.setActive(Boolean.TRUE);
             companyMenuDto.setCreatedAt(new Date());
+            companyMenuDto.setCompanyDataId(loggedUser.getCompanyId());
             CompanyMenuEntity companyMenuEntity = companyMenuRepository.save(CompanyMenuMapper.dtoToEntity(companyMenuDto));
             return CompanyMenuMapper.entityToResponse(companyMenuEntity);
         } catch (Exception e) {

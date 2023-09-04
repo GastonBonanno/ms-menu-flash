@@ -23,21 +23,21 @@ public class CompanyMenuController {
     public CompanyMenuController(CompanyMenuService companyMenuService) {
         this.companyMenuService = companyMenuService;
     }
-//    @GetMapping(value = "/{companyDataId}")
-//    public ResponseEntity<FindCompanyMenuResponse> findByCompanyIdAndMenuId(@PathVariable Long companyDataId) throws Exception {
-//        LOG.info("FindByUserId begins");
-//        FindCompanyMenuResponse response = companyMenuService.getCompanyMenu(companyDataId);
-//        LOG.info("FindByUserId ends with response: {} ", response);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
 
     @GetMapping(value = "")
     public ResponseEntity<List<FindCompanyMenuResponse>> findByCompanyId(@RequestHeader("auth-token") String authToken) throws Exception {
         LOG.info("FindByUserId begins");
-//        String authToken = requestEntity.getHeaders().getFirst("auth-token");
         List<FindCompanyMenuResponse> listResponse = companyMenuService.getCompanyMenu(authToken);
         LOG.info("FindByUserId ends with response: {} ", listResponse);
         return new ResponseEntity<>(listResponse, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<FindCompanyMenuResponse> findById(@PathVariable Long id) throws Exception {
+        LOG.info("findById begins");
+        FindCompanyMenuResponse response = companyMenuService.getMenuById(id);
+        LOG.info("FindByUserId ends with response: {} ", response);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping

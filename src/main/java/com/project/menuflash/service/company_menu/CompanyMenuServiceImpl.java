@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +40,19 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
             List<CompanyMenuEntity> listCompanyMenuEntities = companyMenuRepository.findByActiveAndCompanyDataId(Boolean.TRUE, loggedUser.getCompanyId());
             return listCompanyMenuEntities.stream().map(CompanyMenuMapper::companyMenuEntityToFindCompanyMenuResponse).collect(Collectors.toList());
+        } catch (Exception e) {
+            LOG.error("getCompanyMenu error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar menu de empresa", e);
+        }
+    }
+
+    public FindCompanyMenuResponse getMenuById(Long menuId) throws ResponseStatusException {
+        try {
+            FindCompanyMenuResponse findCompanyMenuResponse = null;
+            Optional<CompanyMenuEntity> companyMenuEntity = companyMenuRepository.findById(menuId);
+            if(companyMenuEntity.isPresent())
+                findCompanyMenuResponse = CompanyMenuMapper.companyMenuEntityToFindCompanyMenuResponse(companyMenuEntity.get());
+            return findCompanyMenuResponse;
         } catch (Exception e) {
             LOG.error("getCompanyMenu error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar menu de empresa", e);

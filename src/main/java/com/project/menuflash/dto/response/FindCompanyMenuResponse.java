@@ -1,5 +1,6 @@
 package com.project.menuflash.dto.response;
 
+import com.project.menuflash.entity.CategoryMenuEntity;
 import lombok.Data;
 
 import java.util.Date;
@@ -17,5 +18,6 @@ public class FindCompanyMenuResponse {
     private Date createdAt;
     private Date modifiedAt;
     private Date deletedAt;
+    private List<FindCategoryMenuResponse> categories;
 }
 

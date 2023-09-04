@@ -2,7 +2,6 @@ package com.project.menuflash.controller;
 
 import com.project.menuflash.dto.request.CreateCategoryMenuDto;
 import com.project.menuflash.dto.request.UpdateCategoryMenuDto;
-import com.project.menuflash.dto.request.UpdateItemMenuDto;
 import com.project.menuflash.service.category_menu.CategoryMenuService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

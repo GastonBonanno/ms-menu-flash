@@ -24,6 +24,7 @@ public class CompanyMenuMapper {
         findCompanyMenuResponse.setCreatedAt(companyMenuEntity.getCreatedAt());
         findCompanyMenuResponse.setModifiedAt(companyMenuEntity.getModifiedAt());
         findCompanyMenuResponse.setDeletedAt(companyMenuEntity.getDeletedAt());
+        findCompanyMenuResponse.setCategories(companyMenuEntity.getCategories().stream().map(CategoryMenuMapper::entityToResponse).collect(Collectors.toList()));
         return findCompanyMenuResponse;
     }
     public static CreateCompanyMenuResponse entityToResponse(CompanyMenuEntity companyMenuEntity){

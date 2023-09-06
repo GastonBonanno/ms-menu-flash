@@ -13,9 +13,11 @@ public class ItemMenuMapper {
     public static FindAllMenuItemResponse entityToResponse(ItemMenuEntity itemMenuEntity){
         FindAllMenuItemResponse itemMenu = new FindAllMenuItemResponse();
         itemMenu.setId(itemMenuEntity.getId());
+        itemMenu.setCategoryMenuId(itemMenuEntity.getCategoryMenuId());
         itemMenu.setName(itemMenuEntity.getName());
         itemMenu.setDescription(itemMenuEntity.getDescription());
         itemMenu.setPrice(itemMenuEntity.getPrice());
+        itemMenu.setQuantity(itemMenuEntity.getQuantity());
         itemMenu.setActive(itemMenuEntity.getActive());
         itemMenu.setCreatedAt(itemMenuEntity.getCreatedAt());
         itemMenu.setModifiedAt(itemMenuEntity.getModifiedAt());

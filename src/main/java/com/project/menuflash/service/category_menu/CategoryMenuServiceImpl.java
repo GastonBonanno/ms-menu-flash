@@ -3,18 +3,16 @@ package com.project.menuflash.service.category_menu;
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.CreateCategoryMenuDto;
 import com.project.menuflash.dto.request.UpdateCategoryMenuDto;
-import com.project.menuflash.dto.request.UpdateItemMenuDto;
+import com.project.menuflash.dto.response.CategoryMenuResponse;
 import com.project.menuflash.entity.CategoryMenuEntity;
-import com.project.menuflash.entity.ItemMenuEntity;
 import com.project.menuflash.mapper.CategoryMenuMapper;
-import com.project.menuflash.mapper.ItemMenuMapper;
 import com.project.menuflash.repository.CategoryMenuRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,13 +27,17 @@ public class CategoryMenuServiceImpl implements CategoryMenuService {
     }
 
     @Override
-    public void createCategory(List<CreateCategoryMenuDto> listCategoryMenuDto) throws Exception {
+    public List<CategoryMenuResponse> createCategory(List<CreateCategoryMenuDto> listCategoryMenuDto) throws Exception {
         try {
-            List<CategoryMenuEntity> categoryMenuEntities = listCategoryMenuDto.stream().map(CategoryMenuMapper::dtoToEntity).collect(Collectors.toList());
-            categoryMenuRepository.saveAll(categoryMenuEntities);
+            List<CategoryMenuEntity> categoryMenuEntities = listCategoryMenuDto.stream().map(category -> {
+                category.setActive(Boolean.TRUE);
+                return CategoryMenuMapper.dtoToEntity(category);
+            }).collect(Collectors.toList());
+            List<CategoryMenuEntity> savedCategoryMenuEntities = categoryMenuRepository.saveAll(categoryMenuEntities);
+            return savedCategoryMenuEntities.stream().map(CategoryMenuMapper::entityToResponse).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("create category error: {}", e.getMessage());
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear categoría de menú", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear categorías de menú", e);
         }
     }
 

@@ -17,5 +17,6 @@ public class FindCompanyMenuResponse {
     private Date createdAt;
     private Date modifiedAt;
     private Date deletedAt;
+    private List<CategoryMenuResponse> listCategory;
 }
 

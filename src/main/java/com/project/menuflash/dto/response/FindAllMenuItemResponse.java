@@ -7,9 +7,11 @@ import java.util.Date;
 @Data
 public class FindAllMenuItemResponse {
     private Long id;
+    private Long categoryMenuId;
     private String name;
     private String description;
     private BigDecimal price;
+    private Long quantity;
     private Boolean active;
     private Date createdAt;
     private Date modifiedAt;

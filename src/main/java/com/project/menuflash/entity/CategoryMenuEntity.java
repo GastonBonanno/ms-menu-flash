@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,4 +25,9 @@ public class CategoryMenuEntity {
     @OneToMany(mappedBy = "categoryMenuId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemMenuEntity> itemsMenu;
 
+    public List<ItemMenuEntity> getItemsMenu() {
+        if(this.itemsMenu == null)
+            this.itemsMenu = new ArrayList<>();
+        return itemsMenu;
+    }
 }

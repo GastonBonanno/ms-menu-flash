@@ -3,14 +3,15 @@ package com.project.menuflash.service.item_menu;
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.CreateItemMenuDto;
 import com.project.menuflash.dto.request.UpdateItemMenuDto;
-import com.project.menuflash.dto.request.UpdateStateDto;
+import com.project.menuflash.dto.response.ItemMenuResponse;
 import com.project.menuflash.entity.ItemMenuEntity;
-import com.project.menuflash.entity.StateEntity;
 import com.project.menuflash.mapper.ItemMenuMapper;
 import com.project.menuflash.repository.ItemMenuRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Date;
 
 @Service
 public class ItemMenuServiceImpl implements ItemMenuService {
@@ -24,9 +25,12 @@ public class ItemMenuServiceImpl implements ItemMenuService {
     }
 
     @Override
-    public void createItemMenu(CreateItemMenuDto itemMenuDto) throws Exception {
+    public ItemMenuResponse createItemMenu(CreateItemMenuDto itemMenuDto) throws Exception {
         try {
-            itemMenuRepository.save(ItemMenuMapper.dtoToEntity(itemMenuDto));
+            itemMenuDto.setActive(Boolean.TRUE);
+            itemMenuDto.setCreatedAt(new Date());
+            ItemMenuEntity itemMenuEntity = itemMenuRepository.save(ItemMenuMapper.dtoToEntity(itemMenuDto));
+            return ItemMenuMapper.entityToResponse(itemMenuEntity);
         } catch (Exception e) {
             LOG.error("create item error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear item de categoría", e);

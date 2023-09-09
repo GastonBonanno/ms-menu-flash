@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.util.Date;
 @Data
-public class FindAllMenuItemResponse {
+public class ItemMenuResponse {
     private Long id;
     private Long categoryMenuId;
     private String name;

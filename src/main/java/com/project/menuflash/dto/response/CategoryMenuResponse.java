@@ -10,5 +10,5 @@ public class CategoryMenuResponse {
     private String name;
     private Boolean active;
     private Long companyMenuId;
-    private List<FindAllMenuItemResponse> menuItems;
+    private List<ItemMenuResponse> menuItems;
 }

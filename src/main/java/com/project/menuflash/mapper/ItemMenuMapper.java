@@ -3,15 +3,15 @@ package com.project.menuflash.mapper;
 
 import com.project.menuflash.dto.request.CreateItemMenuDto;
 import com.project.menuflash.dto.request.UpdateItemMenuDto;
-import com.project.menuflash.dto.response.FindAllMenuItemResponse;
+import com.project.menuflash.dto.response.ItemMenuResponse;
 import com.project.menuflash.entity.ItemMenuEntity;
 
 import java.util.Optional;
 
 public class ItemMenuMapper {
 
-    public static FindAllMenuItemResponse entityToResponse(ItemMenuEntity itemMenuEntity){
-        FindAllMenuItemResponse itemMenu = new FindAllMenuItemResponse();
+    public static ItemMenuResponse entityToResponse(ItemMenuEntity itemMenuEntity){
+        ItemMenuResponse itemMenu = new ItemMenuResponse();
         itemMenu.setId(itemMenuEntity.getId());
         itemMenu.setCategoryMenuId(itemMenuEntity.getCategoryMenuId());
         itemMenu.setName(itemMenuEntity.getName());

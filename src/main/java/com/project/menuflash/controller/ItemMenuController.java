@@ -28,10 +28,10 @@ public class ItemMenuController {
         return new ResponseEntity<>(itemMenuResponse,HttpStatus.OK);
     }
 
-    @PatchMapping(value = "/{id}")
-    public ResponseEntity<?> update(@RequestBody UpdateItemMenuDto updateItemMenuDto, @PathVariable Long id) throws Exception {
-        LOG.info("Update begins with state: {} and with id: {}", updateItemMenuDto,id);
-        itemMenuService.updateItemMenu(updateItemMenuDto,id);
+    @PatchMapping()
+    public ResponseEntity<?> update(@RequestBody UpdateItemMenuDto updateItemMenuDto) throws Exception {
+        LOG.info("Update begins with state: {} and with id: {}", updateItemMenuDto);
+        itemMenuService.updateItemMenu(updateItemMenuDto);
         LOG.info("Update ends");
         return new ResponseEntity<>(HttpStatus.OK);
     }

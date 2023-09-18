@@ -38,9 +38,9 @@ public class ItemMenuServiceImpl implements ItemMenuService {
     }
 
 
-    public void updateItemMenu(UpdateItemMenuDto updateItemMenuDto, Long id) throws ResponseStatusException {
+    public void updateItemMenu(UpdateItemMenuDto updateItemMenuDto) throws ResponseStatusException {
         try {
-            ItemMenuEntity itemMenuEntity = getItemMenuEntityById(id);
+            ItemMenuEntity itemMenuEntity = getItemMenuEntityById(updateItemMenuDto.getId());
             itemMenuRepository.save(ItemMenuMapper.updateFromDto(updateItemMenuDto,itemMenuEntity));
         } catch (Exception e) {
             LOG.error("updateState error: {}", e.getMessage());

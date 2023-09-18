@@ -8,7 +8,7 @@ public interface ItemMenuService {
 
   ItemMenuResponse createItemMenu(CreateItemMenuDto createItemMenuDto) throws Exception;
 
-  void updateItemMenu (UpdateItemMenuDto updateItemMenuDto, Long id) throws Exception;
+  void updateItemMenu (UpdateItemMenuDto updateItemMenuDto) throws Exception;
 
   void deleteItem(Long id) throws Exception;
 }

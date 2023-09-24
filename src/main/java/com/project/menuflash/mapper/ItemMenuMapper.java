@@ -44,6 +44,7 @@ public class ItemMenuMapper {
         itemMenuEntity.setDescription(Optional.ofNullable(dto.getDescription()).orElse(itemMenuEntity.getDescription()));
         itemMenuEntity.setPrice(Optional.ofNullable(dto.getPrice()).orElse(itemMenuEntity.getPrice()));
         itemMenuEntity.setActive(Optional.ofNullable(dto.getActive()).orElse(itemMenuEntity.getActive()));
+        itemMenuEntity.setQuantity(Optional.ofNullable(dto.getQuantity()).orElse(itemMenuEntity.getQuantity()));
         itemMenuEntity.setCreatedAt(Optional.ofNullable(dto.getCreatedAt()).orElse(itemMenuEntity.getCreatedAt()));
         itemMenuEntity.setModifiedAt(Optional.ofNullable(dto.getModifiedAt()).orElse(itemMenuEntity.getModifiedAt()));
         itemMenuEntity.setDeletedAt(Optional.ofNullable(dto.getDeletedAt()).orElse(itemMenuEntity.getDeletedAt()));

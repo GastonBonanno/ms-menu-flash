@@ -18,11 +18,11 @@ public class CompanyDataEntity {
     private  Long id;
 
     private String name;
-    private String cuit;
+    private Long cuit;
     private String address;
 
     @Column(name="phone_number")
-    private String phoneNumber;
+    private Long phoneNumber;
 
     private boolean active;
 

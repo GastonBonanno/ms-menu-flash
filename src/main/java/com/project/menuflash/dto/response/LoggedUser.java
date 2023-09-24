@@ -7,9 +7,9 @@ public class LoggedUser {
     private Long companyId;
     private String email;
     private String name;
-    private String cuit;
+    private Long cuit;
     private String address;
-    private String phoneNumber;
+    private Long phoneNumber;
 }
 
 

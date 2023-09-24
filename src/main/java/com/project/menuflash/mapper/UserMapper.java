@@ -1,6 +1,7 @@
 package com.project.menuflash.mapper;
 
 
+import com.project.menuflash.dto.request.RegisterUserDto;
 import com.project.menuflash.dto.response.LoggedUser;
 import com.project.menuflash.dto.response.LoginUserResponse;
 import com.project.menuflash.entity.ClientUserEntity;
@@ -18,5 +19,12 @@ public class UserMapper {
         user.setPhoneNumber(clientUserEntity.getCompanyDataEntity().getPhoneNumber());
         loginUserResponse.setUser(user);
         return loginUserResponse;
+    }
+
+    public static ClientUserEntity dtoToEntity(RegisterUserDto registerUserDto){
+        ClientUserEntity clientUserEntity = new ClientUserEntity();
+        clientUserEntity.setEmail(registerUserDto.getEmail());
+        clientUserEntity.setPassword(registerUserDto.getPassword());
+        return clientUserEntity;
     }
 }

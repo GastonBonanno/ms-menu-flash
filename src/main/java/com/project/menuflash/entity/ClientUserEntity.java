@@ -31,4 +31,7 @@ public class ClientUserEntity {
 
     @OneToOne(mappedBy = "clientUserId")
     private CompanyDataEntity companyDataEntity;
+
+    @Column(name = "company_data_id")
+    private Long companyDataId;
 }

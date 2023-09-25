@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface CompanyDataRepository extends JpaRepository<CompanyDataEntity, Long> {
 
-    CompanyDataEntity findByClientUserId(Long clientUserId) throws Exception;
+//    CompanyDataEntity findByClientUserId(Long clientUserId) throws Exception;
 
 }

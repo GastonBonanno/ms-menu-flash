@@ -38,7 +38,7 @@ public class CompanyDataEntity {
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_user_id", referencedColumnName = "id")
-    private ClientUserEntity clientUserId;
+    private ClientUserEntity clientUserEntity;
 
     @Override
     public String toString() {

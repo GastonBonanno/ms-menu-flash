@@ -16,10 +16,6 @@ public class CompanyDataMapper {
 
     public static CompanyDataEntity dtoToEntity(RegisterUserDto registerUserDto){
         CompanyDataEntity companyDataEntity = new CompanyDataEntity();
-        companyDataEntity.setName(registerUserDto.getCompanyName());
-        companyDataEntity.setCuit(registerUserDto.getCuit());
-        companyDataEntity.setAddress(registerUserDto.getAddress());
-        companyDataEntity.setPhoneNumber(registerUserDto.getPhoneNumber());
         return companyDataEntity;
     }
 }

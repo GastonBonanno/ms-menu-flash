@@ -29,9 +29,7 @@ public class ClientUserEntity {
     @Column(name="deleted_at")
     private Date deletedAt;
 
-    @OneToOne(mappedBy = "clientUserId")
-    private CompanyDataEntity companyDataEntity;
+//    @OneToOne(mappedBy = "clientUserEntity")
+//    private CompanyDataEntity companyDataEntity;
 
-    @Column(name = "company_data_id")
-    private Long companyDataId;
 }

@@ -8,6 +8,7 @@ import java.util.Date;
 public class ItemMenuResponse {
     private Long id;
     private Long categoryMenuId;
+    private Long position;
     private String name;
     private String description;
     private BigDecimal price;

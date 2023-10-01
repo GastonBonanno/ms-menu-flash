@@ -9,6 +9,7 @@ import java.util.Date;
 public class UpdateItemMenuDto {
     private Long id;
     private String name;
+    private Long position;
     private String description;
     private BigDecimal price;
     private Long quantity;

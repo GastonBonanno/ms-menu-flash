@@ -34,6 +34,7 @@ public class CompanyMenuEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "companyMenuId",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("position ASC")
     private List<CategoryMenuEntity> categories;
 
 }

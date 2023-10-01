@@ -15,7 +15,7 @@ public class ItemMenuEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private Long position;
     private String name;
     private String description;
     private BigDecimal price;

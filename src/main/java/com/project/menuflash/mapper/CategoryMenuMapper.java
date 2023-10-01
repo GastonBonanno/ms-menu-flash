@@ -15,6 +15,7 @@ public class CategoryMenuMapper {
         CategoryMenuResponse categoryMenu = new CategoryMenuResponse();
         categoryMenu.setId(categoryMenuEntity.getId());
         categoryMenu.setName(categoryMenuEntity.getName());
+        categoryMenu.setPosition(categoryMenuEntity.getPosition());
         categoryMenu.setActive(categoryMenuEntity.getActive());
         categoryMenu.setCompanyMenuId(categoryMenuEntity.getCompanyMenuId());
         categoryMenu.setMenuItems(categoryMenuEntity.getItemsMenu().stream().map(ItemMenuMapper::entityToResponse).collect(Collectors.toList()));
@@ -24,6 +25,7 @@ public class CategoryMenuMapper {
     public static CategoryMenuEntity dtoToEntity(CreateCategoryMenuDto categoryMenuDto) {
         CategoryMenuEntity menuCategory = new CategoryMenuEntity();
         menuCategory.setName(categoryMenuDto.getName());
+        menuCategory.setPosition(categoryMenuDto.getPosition());
         menuCategory.setActive(categoryMenuDto.getActive());
         menuCategory.setCompanyMenuId(categoryMenuDto.getCompanyMenuId());
         return menuCategory;
@@ -31,6 +33,7 @@ public class CategoryMenuMapper {
 
     public static CategoryMenuEntity updateFromDto(UpdateCategoryMenuDto dto, CategoryMenuEntity categoryMenuEntity) {
         categoryMenuEntity.setName(Optional.ofNullable(dto.getName()).orElse(categoryMenuEntity.getName()));
+        categoryMenuEntity.setPosition(Optional.ofNullable(dto.getPosition()).orElse(categoryMenuEntity.getPosition()));
         categoryMenuEntity.setActive(Optional.ofNullable(dto.getActive()).orElse(categoryMenuEntity.getActive()));
         return categoryMenuEntity;
     }

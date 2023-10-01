@@ -2,6 +2,7 @@ package com.project.menuflash.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ public class CategoryMenuEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private Long position;
+
     private Boolean active;
 
     @Column(name = "company_menu_id")
@@ -23,6 +26,7 @@ public class CategoryMenuEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "categoryMenuId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("position ASC")
     private List<ItemMenuEntity> itemsMenu;
 
     public List<ItemMenuEntity> getItemsMenu() {

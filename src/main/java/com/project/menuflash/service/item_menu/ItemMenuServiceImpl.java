@@ -41,7 +41,7 @@ public class ItemMenuServiceImpl implements ItemMenuService {
     public void updateItemMenu(UpdateItemMenuDto updateItemMenuDto) throws ResponseStatusException {
         try {
             ItemMenuEntity itemMenuEntity = getItemMenuEntityById(updateItemMenuDto.getId());
-            itemMenuRepository.save(ItemMenuMapper.updateFromDto(updateItemMenuDto,itemMenuEntity));
+            itemMenuRepository.save(ItemMenuMapper.updateDtoToEntity(updateItemMenuDto,itemMenuEntity));
         } catch (Exception e) {
             LOG.error("updateState error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar estado", e);

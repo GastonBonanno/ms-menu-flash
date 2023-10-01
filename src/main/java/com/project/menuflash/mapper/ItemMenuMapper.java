@@ -14,6 +14,7 @@ public class ItemMenuMapper {
         ItemMenuResponse itemMenu = new ItemMenuResponse();
         itemMenu.setId(itemMenuEntity.getId());
         itemMenu.setCategoryMenuId(itemMenuEntity.getCategoryMenuId());
+        itemMenu.setPosition(itemMenuEntity.getPosition());
         itemMenu.setName(itemMenuEntity.getName());
         itemMenu.setDescription(itemMenuEntity.getDescription());
         itemMenu.setPrice(itemMenuEntity.getPrice());
@@ -29,6 +30,7 @@ public class ItemMenuMapper {
         ItemMenuEntity itemMenuEntity = new ItemMenuEntity();
         itemMenuEntity.setCategoryMenuId(menuItemDto.getCategoryMenuId());
         itemMenuEntity.setName(menuItemDto.getName());
+        itemMenuEntity.setPosition(menuItemDto.getPosition());
         itemMenuEntity.setDescription(menuItemDto.getDescription());
         itemMenuEntity.setPrice(menuItemDto.getPrice());
         itemMenuEntity.setQuantity(menuItemDto.getQuantity());
@@ -39,8 +41,9 @@ public class ItemMenuMapper {
         return itemMenuEntity;
     }
 
-    public static ItemMenuEntity updateFromDto(UpdateItemMenuDto dto,ItemMenuEntity itemMenuEntity) {
+    public static ItemMenuEntity updateDtoToEntity(UpdateItemMenuDto dto, ItemMenuEntity itemMenuEntity) {
         itemMenuEntity.setName(Optional.ofNullable(dto.getName()).orElse(itemMenuEntity.getName()));
+        itemMenuEntity.setPosition(Optional.ofNullable(dto.getPosition()).orElse(itemMenuEntity.getPosition()));
         itemMenuEntity.setDescription(Optional.ofNullable(dto.getDescription()).orElse(itemMenuEntity.getDescription()));
         itemMenuEntity.setPrice(Optional.ofNullable(dto.getPrice()).orElse(itemMenuEntity.getPrice()));
         itemMenuEntity.setActive(Optional.ofNullable(dto.getActive()).orElse(itemMenuEntity.getActive()));

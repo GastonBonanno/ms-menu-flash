@@ -8,6 +8,7 @@ import java.util.List;
 public class CategoryMenuResponse {
     private Long id;
     private String name;
+    private Long position;
     private Boolean active;
     private Long companyMenuId;
     private List<ItemMenuResponse> menuItems;

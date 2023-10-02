@@ -3,12 +3,14 @@ package com.project.menuflash.service.user;
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.LoginUserDto;
 import com.project.menuflash.dto.request.RegisterUserDto;
+import com.project.menuflash.dto.response.CompanyDataResponse;
 import com.project.menuflash.dto.response.LoginUserResponse;
 import com.project.menuflash.entity.ClientUserEntity;
 import com.project.menuflash.entity.CompanyDataEntity;
 import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.CompanyDataMapper;
 import com.project.menuflash.mapper.UserMapper;
+import com.project.menuflash.repository.CompanyDataRepository;
 import com.project.menuflash.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,12 +25,14 @@ public class UserServiceImpl implements UserService {
 
     private static final org.apache.logging.log4j.Logger LOG = org.apache.logging.log4j.LogManager.getLogger(StateController.class);
     private final UserRepository userRepository;
+    private final CompanyDataRepository companyDataRepository;
 
     private final TokenService tokenService;
 
-    public UserServiceImpl(UserRepository userRepository, TokenService tokenService) {
+    public UserServiceImpl(UserRepository userRepository, TokenService tokenService, CompanyDataRepository companyDataRepository) {
         this.userRepository = userRepository;
         this.tokenService = tokenService;
+        this.companyDataRepository = companyDataRepository;
     }
 
     public LoginUserResponse loginUser(LoginUserDto loginUserDto) throws ResponseStatusException {
@@ -72,11 +76,22 @@ public class UserServiceImpl implements UserService {
             ClientUserEntity clientUser = UserMapper.dtoToEntity(registerUserDto);
             clientUser.setActive(Boolean.TRUE);
             clientUser.setCreatedAt(new Date());
-            userRepository.save(clientUser);
+            ClientUserEntity clientUserSaved = userRepository.save(clientUser);
+            CompanyDataEntity companyDataEntity = new CompanyDataEntity();
+            companyDataEntity.setActive(Boolean.TRUE);
+            companyDataEntity.setCreatedAt(new Date());
+            companyDataEntity.setClientUserEntity(clientUserSaved);
+            companyDataRepository.save(companyDataEntity);
         } catch (Exception e) {
             LOG.error("registerUser error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear usuario", e);
         }
+    }
+
+    public CompanyDataResponse getCompanyData(String authToken) throws Exception {
+        Long id = tokenService.getUserFromToken(authToken).getId();
+        CompanyDataEntity companyDataEntity = companyDataRepository.findByClientUserId(id);
+        return CompanyDataMapper.entityToResponse(companyDataEntity);
     }
 
     private String hashPassword(String password){

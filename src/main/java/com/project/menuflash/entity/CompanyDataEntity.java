@@ -35,6 +35,9 @@ public class CompanyDataEntity {
     @Column(name="deleted_at")
     private Date deletedAt;
 
+    @Column(name="client_user_id",insertable=false, updatable=false)
+    private Long clientUserId;
+
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_user_id", referencedColumnName = "id")

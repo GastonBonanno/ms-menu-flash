@@ -2,9 +2,9 @@ package com.project.menuflash.controller;
 
 import com.project.menuflash.dto.request.LoginUserDto;
 import com.project.menuflash.dto.request.RegisterUserDto;
+import com.project.menuflash.dto.response.CompanyDataResponse;
 import com.project.menuflash.dto.response.LoginUserResponse;
 import com.project.menuflash.service.user.UserService;
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,4 +43,11 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/company-data")
+    public ResponseEntity<CompanyDataResponse> findCompanyData(@RequestHeader("auth-token") String authToken) throws Exception {
+        LOG.info("updateCompanyData begins");
+        CompanyDataResponse response = userService.getCompanyData(authToken);
+        LOG.info("Finished updateCompanyData");
+        return new ResponseEntity<CompanyDataResponse>(response, HttpStatus.OK);
+    }
 }

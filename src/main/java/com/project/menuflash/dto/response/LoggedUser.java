@@ -4,12 +4,8 @@ import lombok.Data;
 
 @Data
 public class LoggedUser {
-    private Long companyId;
+    private Long id;
     private String email;
-    private String name;
-    private Long cuit;
-    private String address;
-    private Long phoneNumber;
 }
 
 

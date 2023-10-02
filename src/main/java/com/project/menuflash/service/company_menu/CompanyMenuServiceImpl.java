@@ -6,7 +6,6 @@ import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
 import com.project.menuflash.dto.response.CreateCompanyMenuResponse;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.dto.response.LoggedUser;
-import com.project.menuflash.entity.CompanyDataEntity;
 import com.project.menuflash.entity.CompanyMenuEntity;
 import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.CompanyMenuMapper;
@@ -38,7 +37,7 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
     public List<FindCompanyMenuResponse> getCompanyMenu(String authToken) throws ResponseStatusException {
         try {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
-            List<CompanyMenuEntity> listCompanyMenuEntities = companyMenuRepository.findByActiveAndCompanyDataId(Boolean.TRUE, loggedUser.getCompanyId());
+            List<CompanyMenuEntity> listCompanyMenuEntities = companyMenuRepository.findByActiveAndCompanyDataId(Boolean.TRUE, loggedUser.getId());
             return listCompanyMenuEntities.stream().map(CompanyMenuMapper::companyMenuEntityToFindCompanyMenuResponse).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("getCompanyMenu error: {}", e.getMessage());
@@ -65,7 +64,7 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
             companyMenuDto.setActive(Boolean.TRUE);
             companyMenuDto.setCreatedAt(new Date());
-            companyMenuDto.setCompanyDataId(loggedUser.getCompanyId());
+            companyMenuDto.setCompanyDataId(loggedUser.getId());
             CompanyMenuEntity companyMenuEntity = companyMenuRepository.save(CompanyMenuMapper.dtoToEntity(companyMenuDto));
             return CompanyMenuMapper.entityToResponse(companyMenuEntity);
         } catch (Exception e) {

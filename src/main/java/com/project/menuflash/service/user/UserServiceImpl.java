@@ -3,12 +3,15 @@ package com.project.menuflash.service.user;
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.LoginUserDto;
 import com.project.menuflash.dto.request.RegisterUserDto;
+import com.project.menuflash.dto.request.UpdateCompanyDataDto;
 import com.project.menuflash.dto.response.CompanyDataResponse;
 import com.project.menuflash.dto.response.LoginUserResponse;
 import com.project.menuflash.entity.ClientUserEntity;
 import com.project.menuflash.entity.CompanyDataEntity;
+import com.project.menuflash.entity.ItemMenuEntity;
 import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.CompanyDataMapper;
+import com.project.menuflash.mapper.ItemMenuMapper;
 import com.project.menuflash.mapper.UserMapper;
 import com.project.menuflash.repository.CompanyDataRepository;
 import com.project.menuflash.repository.UserRepository;
@@ -19,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.SecureRandom;
 import java.util.Date;
+import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -71,6 +75,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerUser(RegisterUserDto registerUserDto) {
         try {
+            ClientUserEntity clientUserEntity = userRepository.findByEmail(registerUserDto.getEmail());
+            if (Objects.nonNull(clientUserEntity)){
+                LOG.info("registerUser error: El usuario ya existe");
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "El usuario ya existe");
+            }
             String passEncrypted = hashPassword(registerUserDto.getPassword());
             registerUserDto.setPassword(passEncrypted);
             ClientUserEntity clientUser = UserMapper.dtoToEntity(registerUserDto);
@@ -94,9 +103,31 @@ public class UserServiceImpl implements UserService {
         return CompanyDataMapper.entityToResponse(companyDataEntity);
     }
 
+    public void updateCompanyData (String authToken, UpdateCompanyDataDto updateCompanyDataDto) throws Exception{
+        try {
+            Long id = tokenService.getUserFromToken(authToken).getId();
+            CompanyDataEntity companyDataEntity = getCompanyDataEntityById(id);
+            companyDataEntity.setModifiedAt(new Date());
+            companyDataRepository.save(CompanyDataMapper.updateDtoToEntity(updateCompanyDataDto,companyDataEntity));
+        } catch (Exception e) {
+            LOG.error("updateState error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar estado", e);
+        }
+    }
+
+
     private String hashPassword(String password){
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10, new SecureRandom());
         return bCryptPasswordEncoder.encode(password);
+    }
+
+    private CompanyDataEntity getCompanyDataEntityById(Long id) throws Exception {
+        try {
+            return companyDataRepository.findByClientUserId(id);
+        } catch (Exception e) {
+            LOG.error("getStateEntityById error: {}", e.getMessage());
+            throw new Exception();
+        }
     }
 
 }

@@ -1,9 +1,6 @@
 package com.project.menuflash.service.user;
 
-import com.project.menuflash.dto.request.CreateStateDto;
-import com.project.menuflash.dto.request.LoginUserDto;
-import com.project.menuflash.dto.request.RegisterUserDto;
-import com.project.menuflash.dto.request.UpdateStateDto;
+import com.project.menuflash.dto.request.*;
 import com.project.menuflash.dto.response.CompanyDataResponse;
 import com.project.menuflash.dto.response.FindAllStateResponse;
 import com.project.menuflash.dto.response.LoginUserResponse;
@@ -20,4 +17,6 @@ public interface UserService {
   void registerUser(RegisterUserDto registerUserDto);
 
   CompanyDataResponse getCompanyData(String authToken) throws Exception;
+
+  void updateCompanyData (String authToken,UpdateCompanyDataDto updateCompanyDataDto) throws Exception;
 }

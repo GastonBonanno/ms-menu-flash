@@ -30,7 +30,7 @@ public class ItemMenuController {
 
     @PatchMapping()
     public ResponseEntity<?> update(@RequestBody UpdateItemMenuDto updateItemMenuDto) throws Exception {
-        LOG.info("Update begins with state: {} and with id: {}", updateItemMenuDto);
+        LOG.info("Update begins with id: {}", updateItemMenuDto.getId());
         itemMenuService.updateItemMenu(updateItemMenuDto);
         LOG.info("Update ends");
         return new ResponseEntity<>(HttpStatus.OK);

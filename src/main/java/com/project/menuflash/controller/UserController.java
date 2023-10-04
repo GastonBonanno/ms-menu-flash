@@ -1,7 +1,6 @@
 package com.project.menuflash.controller;
 
-import com.project.menuflash.dto.request.LoginUserDto;
-import com.project.menuflash.dto.request.RegisterUserDto;
+import com.project.menuflash.dto.request.*;
 import com.project.menuflash.dto.response.CompanyDataResponse;
 import com.project.menuflash.dto.response.LoginUserResponse;
 import com.project.menuflash.service.user.UserService;
@@ -50,4 +49,14 @@ public class UserController {
         LOG.info("Finished updateCompanyData");
         return new ResponseEntity<CompanyDataResponse>(response, HttpStatus.OK);
     }
+
+    @PatchMapping(path = "/company-data")
+    public ResponseEntity<?> update(@RequestHeader("auth-token") String authToken, @RequestBody UpdateCompanyDataDto updateCompanyDataDto) throws Exception {
+        LOG.info("Update begins ");
+        userService.updateCompanyData(authToken,updateCompanyDataDto);
+        LOG.info("Update ends");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }

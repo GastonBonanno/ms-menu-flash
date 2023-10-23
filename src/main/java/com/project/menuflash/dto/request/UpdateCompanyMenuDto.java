@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class UpdateCompanyMenuDto {
+    private String branch;
     private String title;
     private String description;
     private String header;

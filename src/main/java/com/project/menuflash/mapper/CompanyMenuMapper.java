@@ -15,6 +15,7 @@ public class CompanyMenuMapper {
     public static FindCompanyMenuResponse companyMenuEntityToFindCompanyMenuResponse(CompanyMenuEntity companyMenuEntity){
         FindCompanyMenuResponse findCompanyMenuResponse = new FindCompanyMenuResponse();
         findCompanyMenuResponse.setId(companyMenuEntity.getId());
+        findCompanyMenuResponse.setBranch(companyMenuEntity.getBranch());
         findCompanyMenuResponse.setTitle(companyMenuEntity.getTitle());
         findCompanyMenuResponse.setDescription(companyMenuEntity.getDescription());
         findCompanyMenuResponse.setHeader(companyMenuEntity.getHeader());
@@ -30,6 +31,7 @@ public class CompanyMenuMapper {
     public static CreateCompanyMenuResponse entityToResponse(CompanyMenuEntity companyMenuEntity){
         CreateCompanyMenuResponse createCompanyMenuResponse = new CreateCompanyMenuResponse();
         createCompanyMenuResponse.setId(companyMenuEntity.getId());
+        createCompanyMenuResponse.setBranch(companyMenuEntity.getBranch());
         createCompanyMenuResponse.setTitle(companyMenuEntity.getTitle());
         createCompanyMenuResponse.setDescription(companyMenuEntity.getDescription());
         createCompanyMenuResponse.setHeader(companyMenuEntity.getHeader());
@@ -46,6 +48,7 @@ public class CompanyMenuMapper {
     public static CompanyMenuEntity dtoToEntity(CreateCompanyMenuDto companyMenuDto) {
         CompanyMenuEntity menuEntity = new CompanyMenuEntity();
         menuEntity.setTitle(companyMenuDto.getTitle());
+        menuEntity.setBranch(companyMenuDto.getBranch());
         menuEntity.setDescription(companyMenuDto.getDescription());
         menuEntity.setCompanyDataId(companyMenuDto.getCompanyDataId());
         menuEntity.setHeader(companyMenuDto.getHeader());
@@ -59,6 +62,7 @@ public class CompanyMenuMapper {
 
     public static CompanyMenuEntity updateFromDto(UpdateCompanyMenuDto dto, CompanyMenuEntity companyMenuEntity) {
         companyMenuEntity.setTitle(Optional.ofNullable(dto.getTitle()).orElse(companyMenuEntity.getTitle()));
+        companyMenuEntity.setBranch(Optional.ofNullable(dto.getBranch()).orElse(companyMenuEntity.getBranch()));
         companyMenuEntity.setDescription(Optional.ofNullable(dto.getDescription()).orElse(companyMenuEntity.getDescription()));
         companyMenuEntity.setHeader(Optional.ofNullable(dto.getHeader()).orElse(companyMenuEntity.getHeader()));
         companyMenuEntity.setFooter(Optional.ofNullable(dto.getFooter()).orElse(companyMenuEntity.getFooter()));

@@ -16,6 +16,7 @@ public class CompanyMenuEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String branch;
     private String title;
     private String description;
     private String header;

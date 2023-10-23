@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 public class FindCompanyMenuResponse {
     private Long id;
+    private String branch;
     private String title;
     private String description;
     private String header;

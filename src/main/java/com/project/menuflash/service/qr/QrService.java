@@ -6,8 +6,12 @@ import com.project.menuflash.dto.request.UpdateItemMenuDto;
 import com.project.menuflash.dto.response.ItemMenuResponse;
 import com.project.menuflash.dto.response.QrResponse;
 
+import java.util.List;
+
 public interface QrService {
 
-  void createQr(CreateQrDto createQrDto) throws Exception;
+  void createQr(List<CreateQrDto> createQrDto) throws Exception;
+
+  List<QrResponse> getTableQrList(Long id) throws Exception;
 
 }

@@ -25,16 +25,16 @@ public class QrController {
         this.qrService = qrService;
     }
 
-//    @GetMapping(value = "/{id}")
-//    public ResponseEntity<FindCompanyMenuResponse> findByCompanyMenuId(@PathVariable Long id) throws Exception {
-//        LOG.info("findByCompanyMenuId begins");
-//        FindCompanyMenuResponse response = qrService.createQr(id);
-//        LOG.info("findByCompanyMenuId ends with response: {} ", response);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<List<QrResponse>> findByCompanyMenuId(@PathVariable Long id) throws Exception {
+        LOG.info("findByCompanyMenuId begins");
+        List<QrResponse> response = qrService.getTableQrList(id);
+        LOG.info("findByCompanyMenuId ends with response: {} ", response);
+       return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @PostMapping()
-    public ResponseEntity<QrResponse> createQr(@RequestBody CreateQrDto createQrDto) throws Exception {
+    public ResponseEntity<QrResponse> createQr(@RequestBody List<CreateQrDto> createQrDto) throws Exception {
         LOG.info("createQr begins");
         qrService.createQr(createQrDto);
         LOG.info("createQr ends");

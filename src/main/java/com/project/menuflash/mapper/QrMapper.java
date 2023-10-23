@@ -20,11 +20,11 @@ public class QrMapper {
         return qrEntity;
     }
 
-//    public static QrResponse entityToResponse(QrEntity entity){
-//        QrResponse qrResponse = new QrResponse();
-//        qrResponse.setTableName(entity.getTableName());
-//        qrResponse.setId(entity.getId());
-//        qrResponse.setCompanyMenuId(entity.getCompanyMenuId());
-//        return qrResponse;
-//    }
+    public static QrResponse entityToResponse(QrEntity entity){
+        QrResponse qrResponse = new QrResponse();
+        qrResponse.setTableName(entity.getTableName());
+        qrResponse.setId(entity.getId());
+        qrResponse.setCompanyMenuId(entity.getCompanyMenuId());
+        return qrResponse;
+    }
 }

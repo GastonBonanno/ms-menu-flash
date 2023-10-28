@@ -53,11 +53,21 @@ public class QrServiceImpl implements QrService {
     @Override
     public List<QrResponse> getTableQrList(Long id) throws Exception {
         try {
-            List<QrEntity> listQrTablesEntities = qrRepository.findAllByCompanyMenuId(id);
+            List<QrEntity> listQrTablesEntities = qrRepository.findAllByCompanyMenuIdOrderByTableName(id);
             return listQrTablesEntities.stream().map(QrMapper::entityToResponse).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("getTableQrList error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar qr de la sucursal", e);
+        }
+    }
+
+    @Override
+    public void deleteQr(Long id) throws Exception {
+        try {
+            qrRepository.deleteById(id);
+        } catch (Exception e) {
+            LOG.error("deleteMenu error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al borrar QR", e);
         }
     }
 

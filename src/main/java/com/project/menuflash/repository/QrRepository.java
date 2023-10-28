@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface QrRepository extends JpaRepository<QrEntity, Long> {
-    List<QrEntity>findAllByCompanyMenuId(Long id);
+    List<QrEntity>findAllByCompanyMenuIdOrderByTableName(Long id);
 }

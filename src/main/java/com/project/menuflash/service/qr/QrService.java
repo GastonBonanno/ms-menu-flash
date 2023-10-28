@@ -14,4 +14,5 @@ public interface QrService {
 
   List<QrResponse> getTableQrList(Long id) throws Exception;
 
+  void deleteQr(Long id) throws Exception;
 }

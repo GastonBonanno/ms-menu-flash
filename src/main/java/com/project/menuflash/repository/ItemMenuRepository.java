@@ -7,6 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ItemMenuRepository extends JpaRepository<ItemMenuEntity, Long> {
-
-//    List<CompanyMenuEntity> findByActiveAndId(Boolean aTrue);
 }

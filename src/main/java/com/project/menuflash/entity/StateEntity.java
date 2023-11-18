@@ -1,6 +1,7 @@
 package com.project.menuflash.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.menuflash.dto.request.UpdateStateDto;
 import com.project.menuflash.dto.response.FindAllStateResponse;
 import lombok.Data;
@@ -20,22 +21,8 @@ public class StateEntity {
 
     private String name;
 
-    public StateEntity(String name) {
-        this.name = name;
-    }
-    public StateEntity() {}
+    @OneToOne(mappedBy = "stateEntity")
+    private ClientOrderEntity clientOrderEntity;
 
-    public FindAllStateResponse toResponseDto(){
-        FindAllStateResponse state = new FindAllStateResponse();
-        state.setId(id);
-        state.setName(name);
-        return state;
-    }
-
-    public StateEntity updateFromDto(UpdateStateDto dto) {
-        setId(dto.getId());
-        setName(Optional.ofNullable(dto.getName()).orElse(getName()));
-        return this;
-    }
 
 }

@@ -5,6 +5,7 @@ import com.project.menuflash.dto.request.CreateStateDto;
 import com.project.menuflash.dto.request.UpdateStateDto;
 import com.project.menuflash.dto.response.FindAllStateResponse;
 import com.project.menuflash.entity.StateEntity;
+import com.project.menuflash.mapper.StateMapper;
 import com.project.menuflash.repository.StateRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class StateServiceImpl implements StateService{
     public List<FindAllStateResponse> getStates() throws ResponseStatusException {
         try {
             List<StateEntity> stateEntities = stateRepository.findAll();
-            return stateEntities.stream().map(StateEntity::toResponseDto).collect(Collectors.toList());
+            return stateEntities.stream().map(StateMapper::entityToResponse).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("getStates error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar estados", e);
@@ -36,7 +37,7 @@ public class StateServiceImpl implements StateService{
 
     public FindAllStateResponse getStateById(Long id) throws ResponseStatusException {
         try {
-            return getStateEntityById(id).toResponseDto();
+            return StateMapper.entityToResponse(getStateEntityById(id));
         } catch (Exception e) {
             LOG.error("getStateById error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar estado", e);
@@ -45,7 +46,9 @@ public class StateServiceImpl implements StateService{
 
     public void createState(CreateStateDto createStateDTO) throws ResponseStatusException {
         try {
-            stateRepository.save(new StateEntity(createStateDTO.getName()));
+            StateEntity stateEntity = new StateEntity();
+            stateEntity.setName(createStateDTO.getName());
+            stateRepository.save(stateEntity);
         } catch (Exception e) {
             LOG.error("getStates error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear estado", e);
@@ -55,7 +58,7 @@ public class StateServiceImpl implements StateService{
     public void updateState(UpdateStateDto updateStateDto,Long id) throws ResponseStatusException {
         try {
             StateEntity stateEntity = getStateEntityById(id);
-            stateRepository.save(stateEntity.updateFromDto(updateStateDto));
+            stateRepository.save(StateMapper.updateEntityFromDto(updateStateDto, stateEntity));
         } catch (Exception e) {
             LOG.error("updateState error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar estado", e);

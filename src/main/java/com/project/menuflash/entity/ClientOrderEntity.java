@@ -21,9 +21,12 @@ public class ClientOrderEntity {
     private Long orderId;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "state_id", referencedColumnName = "id")
     private StateEntity stateEntity;
+
+    @Column(name = "state_id", insertable=false, updatable=false)
+    private Long stateId;
 
     @Column(name="table_name")
     private String tableName;

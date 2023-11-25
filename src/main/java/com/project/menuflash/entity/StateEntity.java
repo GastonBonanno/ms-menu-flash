@@ -7,6 +7,7 @@ import com.project.menuflash.dto.response.FindAllStateResponse;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -21,8 +22,8 @@ public class StateEntity {
 
     private String name;
 
-    @OneToOne(mappedBy = "stateEntity")
-    private ClientOrderEntity clientOrderEntity;
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "stateId", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ClientOrderEntity> clientOrdersEntity;
 
 }

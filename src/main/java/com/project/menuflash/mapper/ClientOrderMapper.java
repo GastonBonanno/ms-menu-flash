@@ -21,6 +21,7 @@ public class ClientOrderMapper {
         clientOrderResponse.setOrderId(clientOrderEntity.getOrderId());
         clientOrderResponse.setState(StateMapper.entityToResponse(clientOrderEntity.getStateEntity()));
         clientOrderResponse.setTableName(clientOrderEntity.getTableName());
+        clientOrderResponse.setClientEmail(clientOrderEntity.getClientEmail());
         clientOrderResponse.setCompanyMenuId(clientOrderEntity.getCompanyMenuId());
         clientOrderResponse.setActive(clientOrderEntity.getActive());
         clientOrderResponse.setCreatedAt(clientOrderEntity.getCreatedAt());

@@ -14,6 +14,7 @@ public class FindAllClientOrderResponse {
     private Long orderId;
     private FindAllStateResponse state;
     private String tableName;
+    private String clientEmail;
     private Long companyMenuId;
     private Boolean active;
     private Date createdAt;

@@ -31,6 +31,9 @@ public class ClientOrderEntity {
     @Column(name="table_name")
     private String tableName;
 
+    @Column(name="client_email")
+    private String clientEmail;
+
     @Column(name="company_menu_id")
     private Long companyMenuId;
 

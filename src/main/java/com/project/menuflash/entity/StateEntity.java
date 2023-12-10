@@ -22,8 +22,8 @@ public class StateEntity {
 
     private String name;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "stateId", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ClientOrderEntity> clientOrdersEntity;
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "stateEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<ClientOrderEntity> clientOrdersEntity;
 
 }

@@ -11,4 +11,5 @@ import java.util.List;
 public interface ClientOrderRepository extends JpaRepository<ClientOrderEntity, Long> {
 
     List<ClientOrderEntity> findByCompanyMenuIdOrderByCreatedAtDesc(Long companyMenuId);
+    List<ClientOrderEntity> findByClientEmailOrderByCreatedAtDesc(String clientEmail);
 }

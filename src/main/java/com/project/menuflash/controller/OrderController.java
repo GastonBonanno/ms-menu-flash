@@ -26,11 +26,20 @@ public class OrderController {
 
     @GetMapping
     public ResponseEntity<List<FindAllClientOrderResponse>> findAll(@RequestHeader("auth-token") String authToken) throws Exception {
-        LOG.info("Create begins");
+        LOG.info("findAll begins");
         List<FindAllClientOrderResponse> clientOrderResponse= clientOrderService.findAllByCompanyMenuId(authToken);
         LOG.info("finished");
         return new ResponseEntity<>(clientOrderResponse,HttpStatus.OK);
     }
+
+    @GetMapping(value="/client-email")
+    public ResponseEntity<List<FindAllClientOrderResponse>> findAllByClientEmail(@RequestHeader("auth-token") String authToken) throws Exception {
+        LOG.info("findAllByClientEmail begins");
+        List<FindAllClientOrderResponse> clientOrderResponse= clientOrderService.findAllByClientEmail(authToken);
+        LOG.info("finished");
+        return new ResponseEntity<>(clientOrderResponse,HttpStatus.OK);
+    }
+
 
     @PutMapping(value="/{id}")
     public ResponseEntity<?> updateState(@PathVariable Long id, @RequestParam String state) throws Exception {

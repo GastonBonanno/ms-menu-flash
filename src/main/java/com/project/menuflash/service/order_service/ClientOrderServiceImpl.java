@@ -56,6 +56,19 @@ public class ClientOrderServiceImpl implements ClientOrderService {
             return clientOrderEntityList.stream().map(ClientOrderMapper::entityToResponse).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("findAllByCompanyMenuId error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar ordenes de la compañia", e);
+        }
+    }
+
+    @Override
+    public List<FindAllClientOrderResponse> findAllByClientEmail(String authToken) throws Exception {
+        try {
+            LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
+            ClientUserEntity clientUserEntity = userRepository.findByEmail(loggedUser.getEmail());
+            List<ClientOrderEntity> clientOrderEntityList = clientOrderRepository.findByClientEmailOrderByCreatedAtDesc(clientUserEntity.getEmail());
+            return clientOrderEntityList.stream().map(ClientOrderMapper::entityToResponse).collect(Collectors.toList());
+        } catch (Exception e) {
+            LOG.error("findAllByClientEmail error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al buscar ordenes del usuario", e);
         }
     }

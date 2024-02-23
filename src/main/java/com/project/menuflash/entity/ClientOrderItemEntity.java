@@ -1,9 +1,8 @@
 package com.project.menuflash.entity;
 
 
+import jakarta.persistence.*;
 import lombok.Data;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name="client_order_item")

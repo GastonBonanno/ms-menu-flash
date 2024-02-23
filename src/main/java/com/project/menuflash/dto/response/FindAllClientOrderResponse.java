@@ -1,10 +1,7 @@
 package com.project.menuflash.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.menuflash.entity.ClientOrderItemEntity;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 

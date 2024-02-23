@@ -1,17 +1,11 @@
 package com.project.menuflash.mapper;
 
 
-import com.project.menuflash.dto.request.*;
+import com.project.menuflash.dto.request.UpdateCompanyDataDto;
 import com.project.menuflash.dto.response.CompanyDataResponse;
-import com.project.menuflash.dto.response.CreateCompanyMenuResponse;
-import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.entity.CompanyDataEntity;
-import com.project.menuflash.entity.CompanyMenuEntity;
-import com.project.menuflash.entity.ItemMenuEntity;
 
-import javax.persistence.Column;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class CompanyDataMapper {
 

@@ -1,14 +1,8 @@
 package com.project.menuflash.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.menuflash.dto.request.UpdateStateDto;
-import com.project.menuflash.dto.response.FindAllStateResponse;
+import jakarta.persistence.*;
 import lombok.Data;
-
-import javax.persistence.*;
-import java.util.List;
-import java.util.Optional;
 
 
 @Entity

@@ -1,10 +1,9 @@
 package com.project.menuflash.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @Entity

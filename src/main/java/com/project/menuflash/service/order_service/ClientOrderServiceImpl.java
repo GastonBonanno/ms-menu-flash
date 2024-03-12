@@ -2,17 +2,17 @@ package com.project.menuflash.service.order_service;
 
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.CreateItemMenuDto;
+import com.project.menuflash.dto.request.CreateOrderDto;
+import com.project.menuflash.dto.request.CreateQrDto;
 import com.project.menuflash.dto.request.UpdateItemMenuDto;
 import com.project.menuflash.dto.response.FindAllClientOrderResponse;
 import com.project.menuflash.dto.response.ItemMenuResponse;
 import com.project.menuflash.dto.response.LoggedUser;
-import com.project.menuflash.entity.ClientOrderEntity;
-import com.project.menuflash.entity.ClientUserEntity;
-import com.project.menuflash.entity.ItemMenuEntity;
-import com.project.menuflash.entity.StateEntity;
+import com.project.menuflash.entity.*;
 import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.ClientOrderMapper;
 import com.project.menuflash.mapper.ItemMenuMapper;
+import com.project.menuflash.mapper.QrMapper;
 import com.project.menuflash.repository.ClientOrderRepository;
 import com.project.menuflash.repository.ItemMenuRepository;
 import com.project.menuflash.repository.StateRepository;
@@ -83,5 +83,18 @@ public class ClientOrderServiceImpl implements ClientOrderService {
 
         clientOrderEntity.get().setStateEntity(stateEntity.get());
         clientOrderRepository.save(clientOrderEntity.get());
+    }
+
+    @Override
+    public void createOrder(CreateOrderDto createOrderDto) throws Exception {
+        try {
+            ClientOrderEntity orderEntity = ClientOrderMapper.dtoToEntity(createOrderDto);
+            orderEntity.setActive(Boolean.TRUE);
+            orderEntity.setCreatedAt(new Date());
+            clientOrderRepository.save(orderEntity);
+        } catch (Exception e) {
+            LOG.error("create order error: {}", e.getMessage());
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear su orden", e);
+        }
     }
 }

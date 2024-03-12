@@ -48,7 +48,4 @@ public class QrController {
         LOG.info("Delete ends");
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
-
 }

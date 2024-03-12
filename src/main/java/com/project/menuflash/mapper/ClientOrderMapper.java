@@ -1,16 +1,11 @@
 package com.project.menuflash.mapper;
 
 
-import com.project.menuflash.dto.request.CreateCompanyMenuDto;
-import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
-import com.project.menuflash.dto.response.CreateCompanyMenuResponse;
-import com.project.menuflash.dto.response.FindAllClientOrderItemResponse;
+import com.project.menuflash.dto.request.CreateOrderDto;
 import com.project.menuflash.dto.response.FindAllClientOrderResponse;
-import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.entity.ClientOrderEntity;
-import com.project.menuflash.entity.CompanyMenuEntity;
+import com.project.menuflash.entity.ClientOrderItemEntity;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ClientOrderMapper {
@@ -33,4 +28,14 @@ public class ClientOrderMapper {
                                                             .collect(Collectors.toList()));
         return clientOrderResponse;
     }
+
+    public static ClientOrderEntity dtoToEntity(CreateOrderDto dto){
+        ClientOrderEntity clientOrderEntity = new ClientOrderEntity();
+        clientOrderEntity.setTableName(dto.getTableName());
+        clientOrderEntity.setClientEmail(dto.getClientEmail());
+        clientOrderEntity.setCompanyMenuId(dto.getCompanyMenuId());
+        clientOrderEntity.setClientOrderItemEntityList(dto.getClientOrderItemDto().stream().map(ClientOrderItemMapper::createOrderItemEntityToResponse).collect(Collectors.toList()));
+        return clientOrderEntity;
+    }
+
 }

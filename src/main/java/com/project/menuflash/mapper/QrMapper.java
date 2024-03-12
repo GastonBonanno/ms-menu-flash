@@ -1,15 +1,9 @@
 package com.project.menuflash.mapper;
 
 
-import com.project.menuflash.dto.request.CreateItemMenuDto;
 import com.project.menuflash.dto.request.CreateQrDto;
-import com.project.menuflash.dto.request.UpdateItemMenuDto;
-import com.project.menuflash.dto.response.ItemMenuResponse;
 import com.project.menuflash.dto.response.QrResponse;
-import com.project.menuflash.entity.ItemMenuEntity;
 import com.project.menuflash.entity.QrEntity;
-
-import java.util.Optional;
 
 public class QrMapper {
 

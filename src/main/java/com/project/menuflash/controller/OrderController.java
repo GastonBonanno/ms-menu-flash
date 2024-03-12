@@ -1,10 +1,9 @@
 package com.project.menuflash.controller;
 
-import com.project.menuflash.dto.request.CreateItemMenuDto;
-import com.project.menuflash.dto.request.UpdateItemMenuDto;
-import com.project.menuflash.dto.request.UpdateStateDto;
+import com.project.menuflash.dto.request.*;
 import com.project.menuflash.dto.response.FindAllClientOrderResponse;
 import com.project.menuflash.dto.response.ItemMenuResponse;
+import com.project.menuflash.dto.response.QrResponse;
 import com.project.menuflash.service.item_menu.ItemMenuService;
 import com.project.menuflash.service.order_service.ClientOrderService;
 import org.springframework.http.HttpStatus;
@@ -46,6 +45,14 @@ public class OrderController {
         LOG.info("Update order state begins with id: {}", id);
         clientOrderService.updateOrderState(id, state);
         LOG.info("update state ends");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> createOrder(@RequestBody CreateOrderDto createOrderDto) throws Exception {
+        LOG.info("createOrder begins");
+        clientOrderService.createOrder(createOrderDto);
+        LOG.info("createOrder ends");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

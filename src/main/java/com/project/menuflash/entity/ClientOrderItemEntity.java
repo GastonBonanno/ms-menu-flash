@@ -19,7 +19,12 @@ public class ClientOrderItemEntity {
     @Column(name="item_menu_id")
     private Long itemMenuId;
 
-    @Column(name="client_order_id")
+//    @JsonIgnore
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "client_order_id", referencedColumnName = "id")
+//    private ClientOrderEntity clientOrderEntity;
+
+    @Column(name = "clientOrderId", insertable=false, updatable=false)
     private Long clientOrderId;
 
     @Column(name="item_name")

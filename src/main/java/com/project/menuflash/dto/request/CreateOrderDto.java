@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class CreateOrderDto {
+    private Long orderId;
     private String tableName;
     private String clientEmail;
     private Long companyMenuId;

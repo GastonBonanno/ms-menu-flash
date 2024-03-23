@@ -27,7 +27,6 @@ public class ClientOrderItemMapper {
         ClientOrderItemEntity dataResponse = new ClientOrderItemEntity();
         dataResponse.setAdditionalComments(clientOrderItemDto.getAdditionalComments());
         dataResponse.setItemMenuId(clientOrderItemDto.getItemMenuId());
-        dataResponse.setClientOrderId(clientOrderItemDto.getClientOrderId());
         dataResponse.setItemName(clientOrderItemDto.getItemName());
         dataResponse.setDescription(clientOrderItemDto.getDescription());
         dataResponse.setQuantity(clientOrderItemDto.getQuantity());

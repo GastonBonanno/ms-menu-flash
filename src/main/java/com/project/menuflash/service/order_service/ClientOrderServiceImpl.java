@@ -1,10 +1,7 @@
 package com.project.menuflash.service.order_service;
 
 import com.project.menuflash.controller.StateController;
-import com.project.menuflash.dto.request.CreateItemMenuDto;
-import com.project.menuflash.dto.request.CreateOrderDto;
-import com.project.menuflash.dto.request.CreateQrDto;
-import com.project.menuflash.dto.request.UpdateItemMenuDto;
+import com.project.menuflash.dto.request.*;
 import com.project.menuflash.dto.response.FindAllClientOrderResponse;
 import com.project.menuflash.dto.response.ItemMenuResponse;
 import com.project.menuflash.dto.response.LoggedUser;
@@ -13,19 +10,14 @@ import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.ClientOrderMapper;
 import com.project.menuflash.mapper.ItemMenuMapper;
 import com.project.menuflash.mapper.QrMapper;
-import com.project.menuflash.repository.ClientOrderRepository;
-import com.project.menuflash.repository.ItemMenuRepository;
-import com.project.menuflash.repository.StateRepository;
-import com.project.menuflash.repository.UserRepository;
+import com.project.menuflash.repository.*;
 import com.project.menuflash.service.item_menu.ItemMenuService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.swing.text.html.Option;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,13 +26,15 @@ public class ClientOrderServiceImpl implements ClientOrderService {
     private static final org.apache.logging.log4j.Logger LOG = org.apache.logging.log4j.LogManager.getLogger(StateController.class);
 
     private final ClientOrderRepository clientOrderRepository;
+    private final ClientOrderItemRepository clientOrderItemRepository;
     private final TokenService tokenService;
     private final UserRepository userRepository;
 
     private final StateRepository stateRepository;
 
-    public ClientOrderServiceImpl(ClientOrderRepository clientOrderRepository, TokenService tokenService, UserRepository userRepository, StateRepository stateRepository) {
+    public ClientOrderServiceImpl(ClientOrderRepository clientOrderRepository, ClientOrderItemRepository clientOrderItemRepository, TokenService tokenService, UserRepository userRepository, StateRepository stateRepository) {
         this.clientOrderRepository = clientOrderRepository;
+        this.clientOrderItemRepository = clientOrderItemRepository;
         this.tokenService = tokenService;
         this.userRepository = userRepository;
         this.stateRepository = stateRepository;
@@ -89,12 +83,40 @@ public class ClientOrderServiceImpl implements ClientOrderService {
     public void createOrder(CreateOrderDto createOrderDto) throws Exception {
         try {
             ClientOrderEntity orderEntity = ClientOrderMapper.dtoToEntity(createOrderDto);
+            ClientOrderEntity newOrder;
+            orderEntity.setOrderId(orderIdRandom());
+            StateEntity state = stateRepository.findByName("PENDIENTE");
+            orderEntity.setStateEntity(state);
             orderEntity.setActive(Boolean.TRUE);
             orderEntity.setCreatedAt(new Date());
-            clientOrderRepository.save(orderEntity);
+            orderEntity.setClientOrderItemEntityList(null);
+            newOrder = clientOrderRepository.save(orderEntity);
+            createOrderItemList(newOrder, createOrderDto);
         } catch (Exception e) {
             LOG.error("create order error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear su orden", e);
         }
+    }
+
+    private void createOrderItemList( ClientOrderEntity newOrder, CreateOrderDto createOrderDto) {
+        List<ClientOrderItemEntity> clientOrderItemEntityList = new ArrayList<>();
+        for(ClientOrderItemDto orderItemList : createOrderDto.getClientOrderItemDto()){
+            ClientOrderItemEntity newClientOrderItemEntity = new ClientOrderItemEntity();
+            newClientOrderItemEntity.setClientOrderId(newOrder.getId());
+            newClientOrderItemEntity.setAdditionalComments(orderItemList.getAdditionalComments());
+            newClientOrderItemEntity.setItemMenuId(orderItemList.getItemMenuId());
+            newClientOrderItemEntity.setItemName(orderItemList.getItemName());
+            newClientOrderItemEntity.setDescription(orderItemList.getDescription());
+            newClientOrderItemEntity.setQuantity(orderItemList.getQuantity());
+            clientOrderItemEntityList.add(newClientOrderItemEntity);
+        }
+        clientOrderItemRepository.saveAll(clientOrderItemEntityList);
+    }
+
+    private static long orderIdRandom() {
+        Random random = new Random();
+        int min = 00001;
+        int max = 99999;
+        return random.nextInt(max - min + 1) + min;
     }
 }

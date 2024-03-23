@@ -48,7 +48,6 @@ public class ClientOrderEntity {
     @Column(name="deleted_at")
     private Date deletedAt;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "clientOrderId", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ClientOrderItemEntity> clientOrderItemEntityList;
 }

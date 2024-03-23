@@ -10,5 +10,4 @@ import java.util.List;
 @Repository
 public interface CategoryMenuRepository extends JpaRepository<CategoryMenuEntity, Long> {
 
-//    List<CompanyMenuEntity> findByActiveAndId(Boolean aTrue);
 }

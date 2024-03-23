@@ -7,7 +7,6 @@ import com.project.menuflash.dto.response.CategoryMenuResponse;
 import java.util.List;
 
 public interface CategoryMenuService {
-//  List<FindAllCompanyMenuResponse> getCategoryMenu() throws Exception;
 
   List<CategoryMenuResponse>  createCategory(List<CreateCategoryMenuDto> listCreateCategoryMenuDto) throws Exception;
 

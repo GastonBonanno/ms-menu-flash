@@ -15,8 +15,4 @@ public class StateEntity {
     private  Long id;
     private String name;
 
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "stateEntity", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<ClientOrderEntity> clientOrdersEntity;
-
 }

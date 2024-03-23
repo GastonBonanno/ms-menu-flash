@@ -24,7 +24,7 @@ public class ClientOrderItemEntity {
 //    @JoinColumn(name = "client_order_id", referencedColumnName = "id")
 //    private ClientOrderEntity clientOrderEntity;
 
-    @Column(name = "clientOrderId", insertable=false, updatable=false)
+    @Column(name = "clientOrderId")
     private Long clientOrderId;
 
     @Column(name="item_name")

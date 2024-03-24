@@ -49,9 +49,9 @@ public class OrderController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createOrder(@RequestBody CreateOrderDto createOrderDto) throws Exception {
+    public ResponseEntity<?> createOrder(@RequestBody CreateOrderDto createOrderDto, @RequestHeader("auth-token") String authToken) throws Exception {
         LOG.info("createOrder begins");
-        clientOrderService.createOrder(createOrderDto);
+        clientOrderService.createOrder(createOrderDto, authToken);
         LOG.info("createOrder ends");
         return new ResponseEntity<>(HttpStatus.OK);
     }

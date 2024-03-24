@@ -80,11 +80,13 @@ public class ClientOrderServiceImpl implements ClientOrderService {
     }
 
     @Override
-    public void createOrder(CreateOrderDto createOrderDto) throws Exception {
+    public void createOrder(CreateOrderDto createOrderDto, String authToken) throws Exception {
         try {
+            LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
             ClientOrderEntity orderEntity = ClientOrderMapper.dtoToEntity(createOrderDto);
             ClientOrderEntity newOrder;
             orderEntity.setOrderId(orderIdRandom());
+            orderEntity.setClientEmail(loggedUser.getEmail());
             StateEntity state = stateRepository.findByName("PENDIENTE");
             orderEntity.setStateEntity(state);
             orderEntity.setActive(Boolean.TRUE);

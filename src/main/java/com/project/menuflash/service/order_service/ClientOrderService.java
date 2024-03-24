@@ -14,5 +14,5 @@ public interface ClientOrderService {
 
    void updateOrderState(Long id, String state) throws Exception;
 
-   void createOrder(CreateOrderDto createOrderDto) throws Exception;
+   void createOrder(CreateOrderDto createOrderDto, String authToken) throws Exception;
 }

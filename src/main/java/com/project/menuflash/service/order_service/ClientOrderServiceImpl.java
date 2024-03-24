@@ -80,7 +80,7 @@ public class ClientOrderServiceImpl implements ClientOrderService {
     }
 
     @Override
-    public void createOrder(CreateOrderDto createOrderDto, String authToken) throws Exception {
+    public FindAllClientOrderResponse createOrder(CreateOrderDto createOrderDto, String authToken) throws Exception {
         try {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
             ClientOrderEntity orderEntity = ClientOrderMapper.dtoToEntity(createOrderDto);
@@ -94,6 +94,7 @@ public class ClientOrderServiceImpl implements ClientOrderService {
             orderEntity.setClientOrderItemEntityList(null);
             newOrder = clientOrderRepository.save(orderEntity);
             createOrderItemList(newOrder, createOrderDto);
+            return ClientOrderMapper.entityToResponse(newOrder);
         } catch (Exception e) {
             LOG.error("create order error: {}", e.getMessage());
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear su orden", e);

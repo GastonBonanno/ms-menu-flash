@@ -49,11 +49,11 @@ public class OrderController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createOrder(@RequestBody CreateOrderDto createOrderDto, @RequestHeader("auth-token") String authToken) throws Exception {
+    public ResponseEntity<FindAllClientOrderResponse> createOrder(@RequestBody CreateOrderDto createOrderDto, @RequestHeader("auth-token") String authToken) throws Exception {
         LOG.info("createOrder begins");
-        clientOrderService.createOrder(createOrderDto, authToken);
+        FindAllClientOrderResponse response = clientOrderService.createOrder(createOrderDto, authToken);
         LOG.info("createOrder ends");
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

@@ -31,7 +31,6 @@ public class ClientOrderMapper {
 
     public static ClientOrderEntity dtoToEntity(CreateOrderDto dto){
         ClientOrderEntity clientOrderEntity = new ClientOrderEntity();
-        clientOrderEntity.setOrderId(dto.getOrderId());
         clientOrderEntity.setTableName(dto.getTableName());
         clientOrderEntity.setClientEmail(dto.getClientEmail());
         clientOrderEntity.setCompanyMenuId(dto.getCompanyMenuId());

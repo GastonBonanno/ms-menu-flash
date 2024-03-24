@@ -84,15 +84,14 @@ public class ClientOrderServiceImpl implements ClientOrderService {
         try {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
             ClientOrderEntity orderEntity = ClientOrderMapper.dtoToEntity(createOrderDto);
-            ClientOrderEntity newOrder;
             orderEntity.setOrderId(orderIdRandom());
             orderEntity.setClientEmail(loggedUser.getEmail());
             StateEntity state = stateRepository.findByName("PENDIENTE");
             orderEntity.setStateEntity(state);
             orderEntity.setActive(Boolean.TRUE);
             orderEntity.setCreatedAt(new Date());
-            orderEntity.setClientOrderItemEntityList(null);
-            newOrder = clientOrderRepository.save(orderEntity);
+            orderEntity.setClientOrderItemEntityList(new ArrayList<>());
+            ClientOrderEntity newOrder = clientOrderRepository.save(orderEntity);
             createOrderItemList(newOrder, createOrderDto);
             return ClientOrderMapper.entityToResponse(newOrder);
         } catch (Exception e) {

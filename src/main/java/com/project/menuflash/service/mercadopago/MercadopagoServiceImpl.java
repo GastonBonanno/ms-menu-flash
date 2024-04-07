@@ -40,11 +40,10 @@ public class MercadopagoServiceImpl implements MercadopagoService {
         try {
             PreferenceClient client = new PreferenceClient();
             preference = client.create(preferenceRequest);
+            return preference.getId();
         } catch (Exception e) {
-            System.out.println("Exception en el pagooo: " + e.getMessage());
+            System.out.println("Error en el pago: " + e.getMessage());
         }
-        System.out.println("preference.getId(): " + preference.getId());
-
-        return preference.getId();
+        return null;
     }
 }

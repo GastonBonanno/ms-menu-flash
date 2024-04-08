@@ -15,6 +15,8 @@ public class CompanyDataMapper {
         companyDataResponse.setCuit(companyDataEntity.getCuit());
         companyDataResponse.setAddress(companyDataEntity.getAddress());
         companyDataResponse.setPhoneNumber(companyDataEntity.getPhoneNumber());
+        companyDataResponse.setPublicKey(companyDataEntity.getPublicKey());
+        companyDataResponse.setAccessToken(companyDataEntity.getAccessToken());
         return companyDataResponse;
     }
 
@@ -23,6 +25,8 @@ public class CompanyDataMapper {
         companyDataEntity.setCuit(Optional.ofNullable(dto.getCuit()).orElse(companyDataEntity.getCuit()));
         companyDataEntity.setAddress(Optional.ofNullable(dto.getAddress()).orElse(companyDataEntity.getAddress()));
         companyDataEntity.setPhoneNumber(Optional.ofNullable(dto.getPhoneNumber()).orElse(companyDataEntity.getPhoneNumber()));
+        companyDataEntity.setPublicKey(Optional.ofNullable(dto.getPublicKey()).orElse(companyDataEntity.getPublicKey()));
+        companyDataEntity.setAccessToken(Optional.ofNullable(dto.getAccessToken()).orElse(companyDataEntity.getAccessToken()));
         return companyDataEntity;
     }
 

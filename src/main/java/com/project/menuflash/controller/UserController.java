@@ -47,7 +47,15 @@ public class UserController {
         LOG.info("updateCompanyData begins");
         CompanyDataResponse response = userService.getCompanyData(authToken);
         LOG.info("Finished updateCompanyData");
-        return new ResponseEntity<CompanyDataResponse>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/company-data-by-id")
+    public ResponseEntity<CompanyDataResponse> findCompanyDataById(@RequestParam Long companyId) throws Exception {
+        LOG.info("updateCompanyData begins");
+        CompanyDataResponse response = userService.getCompanyData(companyId);
+        LOG.info("Finished updateCompanyData");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PatchMapping(path = "/company-data")

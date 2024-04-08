@@ -6,4 +6,5 @@ import lombok.Data;
 public class CreateQrDto {
     private String tableName;
     private Long companyMenuId;
+    private Long companyId;
 }

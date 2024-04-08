@@ -11,6 +11,7 @@ public class QrMapper {
         QrEntity qrEntity = new QrEntity();
         qrEntity.setTableName(dto.getTableName());
         qrEntity.setCompanyMenuId(dto.getCompanyMenuId());
+        qrEntity.setCompanyId(dto.getCompanyId());
         return qrEntity;
     }
 
@@ -19,6 +20,7 @@ public class QrMapper {
         qrResponse.setTableName(entity.getTableName());
         qrResponse.setId(entity.getId());
         qrResponse.setCompanyMenuId(entity.getCompanyMenuId());
+        qrResponse.setCompanyId(entity.getCompanyId());
         return qrResponse;
     }
 }

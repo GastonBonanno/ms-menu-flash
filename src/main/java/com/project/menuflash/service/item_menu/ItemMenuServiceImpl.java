@@ -60,7 +60,8 @@ public class ItemMenuServiceImpl implements ItemMenuService {
 
     }
 
-    private ItemMenuEntity getItemMenuEntityById(Long id) throws Exception {
+    @Override
+    public ItemMenuEntity getItemMenuEntityById(Long id) throws Exception {
         try {
             return itemMenuRepository.findById(id).orElse(null);
         } catch (Exception e) {

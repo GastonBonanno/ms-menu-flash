@@ -18,6 +18,9 @@ public class QrEntity {
 
     private Boolean active;
 
+    @Column(name = "company_id")
+    private Long companyId;
+
     @Column(name = "company_menu_id")
     private Long companyMenuId;
 

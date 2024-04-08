@@ -74,7 +74,6 @@ public class TokenService {
     }
 
     private void verifyToken(String token) throws Exception {
-        System.out.println("tokennn: " + token);
         String[] chunks = token.split("\\.");
 
         SecretKeySpec secretKeySpec = new SecretKeySpec(Base64.getDecoder().decode(SEED), SIGNATURE_ALGORITHM.getJcaName());

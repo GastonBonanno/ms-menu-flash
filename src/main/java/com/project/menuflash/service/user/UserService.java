@@ -18,5 +18,7 @@ public interface UserService {
 
   CompanyDataResponse getCompanyData(String authToken) throws Exception;
 
+  CompanyDataResponse getCompanyData(Long companyId) throws Exception;
+
   void updateCompanyData(String authToken,UpdateCompanyDataDto updateCompanyDataDto) throws Exception;
 }

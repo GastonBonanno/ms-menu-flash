@@ -48,6 +48,14 @@ public class OrderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PutMapping(value="/active/{id}")
+    public ResponseEntity<FindAllClientOrderResponse> activateOrder(@PathVariable Long id, @RequestParam boolean active) throws Exception {
+        LOG.info("Activate order begins with id: {}", id);
+        FindAllClientOrderResponse response = clientOrderService.activateOrder(id, active);
+        LOG.info("Activate order ends");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @PostMapping()
     public ResponseEntity<FindAllClientOrderResponse> createOrder(@RequestBody CreateOrderDto createOrderDto, @RequestHeader("auth-token") String authToken) throws Exception {
         LOG.info("createOrder begins");

@@ -11,4 +11,6 @@ public class CompanyDataResponse {
     private Long cuit;
     private String address;
     private Long phoneNumber;
+    private String publicKey;
+    private String accessToken;
 }

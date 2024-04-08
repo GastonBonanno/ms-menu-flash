@@ -14,5 +14,7 @@ public interface ClientOrderService {
 
    void updateOrderState(Long id, String state) throws Exception;
 
+   FindAllClientOrderResponse activateOrder(Long id, boolean active) throws Exception;
+
    FindAllClientOrderResponse createOrder(CreateOrderDto createOrderDto, String authToken) throws Exception;
 }

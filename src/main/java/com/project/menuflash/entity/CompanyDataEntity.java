@@ -23,6 +23,12 @@ public class CompanyDataEntity {
     @Column(name="phone_number")
     private Long phoneNumber;
 
+    @Column(name="public_key")
+    private String publicKey;
+
+    @Column(name="access_token")
+    private String accessToken;
+
     private boolean active;
 
     @Column(name="created_at")

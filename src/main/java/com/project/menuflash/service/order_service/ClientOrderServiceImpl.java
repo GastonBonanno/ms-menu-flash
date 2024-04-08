@@ -46,7 +46,7 @@ public class ClientOrderServiceImpl implements ClientOrderService {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
             ClientUserEntity clientUserEntity = userRepository.findByEmail(loggedUser.getEmail());
             List<ClientOrderEntity> clientOrderEntityList = clientOrderRepository
-                    .findByCompanyMenuIdOrderByCreatedAtDesc(clientUserEntity.getCompanyDataEntity().getId());
+                    .findByCompanyMenuIdAndActiveOrderByCreatedAtDesc(clientUserEntity.getCompanyDataEntity().getId(), Boolean.TRUE);
             return clientOrderEntityList.stream().map(ClientOrderMapper::entityToResponse).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("findAllByCompanyMenuId error: {}", e.getMessage());
@@ -59,7 +59,7 @@ public class ClientOrderServiceImpl implements ClientOrderService {
         try {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
             ClientUserEntity clientUserEntity = userRepository.findByEmail(loggedUser.getEmail());
-            List<ClientOrderEntity> clientOrderEntityList = clientOrderRepository.findByClientEmailOrderByCreatedAtDesc(clientUserEntity.getEmail());
+            List<ClientOrderEntity> clientOrderEntityList = clientOrderRepository.findByClientEmailAndActiveOrderByCreatedAtDesc(clientUserEntity.getEmail(), Boolean.TRUE);
             return clientOrderEntityList.stream().map(ClientOrderMapper::entityToResponse).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("findAllByClientEmail error: {}", e.getMessage());
@@ -80,6 +80,16 @@ public class ClientOrderServiceImpl implements ClientOrderService {
     }
 
     @Override
+    public FindAllClientOrderResponse activateOrder(Long id, boolean active) throws Exception {
+        Optional<ClientOrderEntity> clientOrderEntity = clientOrderRepository.findById(id);
+        if(clientOrderEntity.isEmpty())
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "No se encontró la orden para activar");
+        clientOrderEntity.get().setActive(active);
+        clientOrderRepository.save(clientOrderEntity.get());
+        return ClientOrderMapper.entityToResponse(clientOrderEntity.get());
+    }
+
+    @Override
     public FindAllClientOrderResponse createOrder(CreateOrderDto createOrderDto, String authToken) throws Exception {
         try {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
@@ -88,7 +98,7 @@ public class ClientOrderServiceImpl implements ClientOrderService {
             orderEntity.setClientEmail(loggedUser.getEmail());
             StateEntity state = stateRepository.findByName("PENDIENTE");
             orderEntity.setStateEntity(state);
-            orderEntity.setActive(Boolean.TRUE);
+            orderEntity.setActive(Boolean.FALSE);
             orderEntity.setCreatedAt(new Date());
             orderEntity.setClientOrderItemEntityList(new ArrayList<>());
             ClientOrderEntity newOrder = clientOrderRepository.save(orderEntity);

@@ -1,13 +1,13 @@
 package com.project.menuflash.controller;
 
+import com.project.menuflash.dto.request.MercadopagoDto;
 import com.project.menuflash.dto.response.MercadopagoResponse;
 import com.project.menuflash.service.mercadopago.MercadopagoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -21,9 +21,11 @@ public class MercadopagoController {
     }
 
     @PostMapping(path = "/create-preference")
-    public ResponseEntity<MercadopagoResponse> createPreference() throws Exception {
+    public ResponseEntity<MercadopagoResponse> createPreference(@RequestBody List<MercadopagoDto> mercadopagoDto,
+                                                                @RequestParam Long companyId,
+                                                                @RequestParam Long orderId) throws Exception {
         LOG.info("createPreference begins");
-        String response = mercadopagoService.createPreference();
+        String response = mercadopagoService.createPreference(mercadopagoDto, companyId, orderId);
         LOG.info("Finished");
         return new ResponseEntity<>(MercadopagoResponse.builder().id(response).build(), HttpStatus.OK);
     }

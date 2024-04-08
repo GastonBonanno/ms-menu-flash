@@ -23,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.security.SecureRandom;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -97,10 +98,19 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
     public CompanyDataResponse getCompanyData(String authToken) throws Exception {
         Long id = tokenService.getUserFromToken(authToken).getId();
         CompanyDataEntity companyDataEntity = companyDataRepository.findByClientUserId(id);
         return CompanyDataMapper.entityToResponse(companyDataEntity);
+    }
+
+    @Override
+    public CompanyDataResponse getCompanyData(Long companyId) throws Exception {
+        Optional<CompanyDataEntity> companyDataEntity = companyDataRepository.findById(companyId);
+        if(companyDataEntity.isEmpty())
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al obtener compañia");
+        return CompanyDataMapper.entityToResponse(companyDataEntity.get());
     }
 
     public void updateCompanyData (String authToken, UpdateCompanyDataDto updateCompanyDataDto) throws Exception{

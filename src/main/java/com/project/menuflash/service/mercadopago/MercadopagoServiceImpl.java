@@ -42,10 +42,8 @@ public class MercadopagoServiceImpl implements MercadopagoService {
 
         PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
                                             .id("1234")
-                                            .title("Games")
-                                            .description("PS5")
-                                            .pictureUrl("http://picture.com/PS5")
-                                            .categoryId("games")
+                                            .title("Restaurant/Bar")
+                                            .description("Restaurant/Bar")
                                             .quantity(1)
                                             .currencyId("ARS")
                                             .unitPrice(totalAmount)
@@ -61,9 +59,10 @@ public class MercadopagoServiceImpl implements MercadopagoService {
                 .build();
 
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                .success("http://localhost:8100/afterPayment?orderId="+orderId)
-                .failure("http://localhost:8100/scanQr")
-                .pending("http://localhost:8100/scanQr")
+//                .success("http://localhost:8100/afterPayment?orderId="+orderId)
+//                .failure("http://localhost:8100/scanQr")
+//                .pending("http://localhost:8100/scanQr")
+                .success("http://menuflashapp/?orderId="+orderId)
                 .build();
 
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()

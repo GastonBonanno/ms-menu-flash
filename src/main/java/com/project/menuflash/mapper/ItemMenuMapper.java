@@ -18,7 +18,6 @@ public class ItemMenuMapper {
         itemMenu.setName(itemMenuEntity.getName());
         itemMenu.setDescription(itemMenuEntity.getDescription());
         itemMenu.setPrice(itemMenuEntity.getPrice());
-        itemMenu.setQuantity(itemMenuEntity.getQuantity());
         itemMenu.setActive(itemMenuEntity.getActive());
         itemMenu.setCreatedAt(itemMenuEntity.getCreatedAt());
         itemMenu.setModifiedAt(itemMenuEntity.getModifiedAt());
@@ -33,7 +32,6 @@ public class ItemMenuMapper {
         itemMenuEntity.setPosition(menuItemDto.getPosition());
         itemMenuEntity.setDescription(menuItemDto.getDescription());
         itemMenuEntity.setPrice(menuItemDto.getPrice());
-        itemMenuEntity.setQuantity(menuItemDto.getQuantity());
         itemMenuEntity.setActive(menuItemDto.getActive());
         itemMenuEntity.setCreatedAt(menuItemDto.getCreatedAt());
         itemMenuEntity.setModifiedAt(menuItemDto.getModifiedAt());
@@ -43,11 +41,11 @@ public class ItemMenuMapper {
 
     public static ItemMenuEntity updateDtoToEntity(UpdateItemMenuDto dto, ItemMenuEntity itemMenuEntity) {
         itemMenuEntity.setName(Optional.ofNullable(dto.getName()).orElse(itemMenuEntity.getName()));
+        itemMenuEntity.setCategoryMenuId(Optional.ofNullable(dto.getCategoryMenuId()).orElse(itemMenuEntity.getCategoryMenuId()));
         itemMenuEntity.setPosition(Optional.ofNullable(dto.getPosition()).orElse(itemMenuEntity.getPosition()));
         itemMenuEntity.setDescription(Optional.ofNullable(dto.getDescription()).orElse(itemMenuEntity.getDescription()));
         itemMenuEntity.setPrice(Optional.ofNullable(dto.getPrice()).orElse(itemMenuEntity.getPrice()));
         itemMenuEntity.setActive(Optional.ofNullable(dto.getActive()).orElse(itemMenuEntity.getActive()));
-        itemMenuEntity.setQuantity(Optional.ofNullable(dto.getQuantity()).orElse(itemMenuEntity.getQuantity()));
         itemMenuEntity.setCreatedAt(Optional.ofNullable(dto.getCreatedAt()).orElse(itemMenuEntity.getCreatedAt()));
         itemMenuEntity.setModifiedAt(Optional.ofNullable(dto.getModifiedAt()).orElse(itemMenuEntity.getModifiedAt()));
         itemMenuEntity.setDeletedAt(Optional.ofNullable(dto.getDeletedAt()).orElse(itemMenuEntity.getDeletedAt()));

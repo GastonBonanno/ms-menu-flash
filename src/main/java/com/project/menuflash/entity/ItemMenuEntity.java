@@ -19,7 +19,6 @@ public class ItemMenuEntity {
     private String name;
     private String description;
     private BigDecimal price;
-    private Long quantity;
     private Boolean active;
 
     @Column(name="created_at")

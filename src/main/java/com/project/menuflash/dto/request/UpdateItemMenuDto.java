@@ -8,11 +8,11 @@ import java.util.Date;
 @Data
 public class UpdateItemMenuDto {
     private Long id;
+    private Long categoryMenuId;
     private String name;
     private Long position;
     private String description;
     private BigDecimal price;
-    private Long quantity;
     private Boolean active;
     private Date createdAt;
     private Date modifiedAt;

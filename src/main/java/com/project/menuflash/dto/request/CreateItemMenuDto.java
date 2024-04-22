@@ -12,7 +12,6 @@ public class CreateItemMenuDto {
     private Long position;
     private String description;
     private BigDecimal price;
-    private Long quantity;
     private Boolean active;
     private Date createdAt;
     private Date modifiedAt;

@@ -1,19 +1,13 @@
 package com.project.menuflash.service.qr;
 
 import com.project.menuflash.controller.StateController;
-import com.project.menuflash.dto.request.CreateItemMenuDto;
 import com.project.menuflash.dto.request.CreateQrDto;
-import com.project.menuflash.dto.request.UpdateItemMenuDto;
-import com.project.menuflash.dto.response.ItemMenuResponse;
-import com.project.menuflash.dto.response.LoggedUser;
 import com.project.menuflash.dto.response.QrResponse;
-import com.project.menuflash.entity.CompanyMenuEntity;
-import com.project.menuflash.entity.ItemMenuEntity;
+import com.project.menuflash.entity.CompanyDataEntity;
 import com.project.menuflash.entity.QrEntity;
-import com.project.menuflash.mapper.CompanyMenuMapper;
-import com.project.menuflash.mapper.ItemMenuMapper;
+import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.QrMapper;
-import com.project.menuflash.repository.ItemMenuRepository;
+import com.project.menuflash.repository.CompanyDataRepository;
 import com.project.menuflash.repository.QrRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -29,15 +23,22 @@ public class QrServiceImpl implements QrService {
     private static final org.apache.logging.log4j.Logger LOG = org.apache.logging.log4j.LogManager.getLogger(StateController.class);
 
     private final QrRepository qrRepository;
+    private final TokenService tokenService;
+    private final CompanyDataRepository companyDataRepository;
 
-    public QrServiceImpl(QrRepository qrRepository) {
+    public QrServiceImpl(QrRepository qrRepository, TokenService tokenService, CompanyDataRepository companyDataRepository) {
         this.qrRepository = qrRepository;
+        this.tokenService = tokenService;
+        this.companyDataRepository = companyDataRepository;
     }
 
     @Override
-    public void createQr(List<CreateQrDto> createQrDto) throws Exception {
+    public void createQr(List<CreateQrDto> createQrDto, String authToken) throws Exception {
         try {
+            var loggedUser = tokenService.getUserFromToken(authToken);
+            var companyDataEntity = companyDataRepository.findByClientUserId(loggedUser.getId());
             List<QrEntity> qrEntity = createQrDto.stream().map(dto -> {
+                dto.setCompanyId(companyDataEntity.getId());
                 QrEntity entity = QrMapper.dtoToEntity(dto);
                 entity.setActive(Boolean.TRUE);
                 entity.setCreatedAt(new Date());

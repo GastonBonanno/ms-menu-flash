@@ -1,12 +1,10 @@
 package com.project.menuflash.controller;
 
 import com.project.menuflash.dto.request.CreateCompanyMenuDto;
-import com.project.menuflash.dto.request.UpdateCategoryMenuDto;
 import com.project.menuflash.dto.request.UpdateCompanyMenuDto;
 import com.project.menuflash.dto.response.CreateCompanyMenuResponse;
 import com.project.menuflash.dto.response.FindCompanyMenuResponse;
 import com.project.menuflash.service.company_menu.CompanyMenuService;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

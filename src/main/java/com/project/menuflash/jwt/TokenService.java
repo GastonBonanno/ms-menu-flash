@@ -13,7 +13,7 @@ import java.util.Date;
 @Component
 public class TokenService {
 
-    private final String ttl = "15000000";
+    private final String ttl = "40000000";
     private static final String SEED = "seedTokenGenerator";
     private static final String USER_CLAIM = "user";
 

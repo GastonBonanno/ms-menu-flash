@@ -34,9 +34,9 @@ public class QrController {
     }
 
     @PostMapping()
-    public ResponseEntity<QrResponse> createQr(@RequestBody List<CreateQrDto> createQrDto) throws Exception {
+    public ResponseEntity<QrResponse> createQr(@RequestBody List<CreateQrDto> createQrDto, @RequestHeader("auth-token") String authToken) throws Exception {
         LOG.info("createQr begins");
-        qrService.createQr(createQrDto);
+        qrService.createQr(createQrDto, authToken);
         LOG.info("createQr ends");
         return new ResponseEntity<>(HttpStatus.OK);
     }

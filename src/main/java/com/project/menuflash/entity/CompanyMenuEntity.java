@@ -38,4 +38,8 @@ public class CompanyMenuEntity {
     @OrderBy("position ASC")
     private List<CategoryMenuEntity> categories;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "companyMenuId",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QrEntity> qrs;
+
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface QrService {
 
-  void createQr(List<CreateQrDto> createQrDto) throws Exception;
+  void createQr(List<CreateQrDto> createQrDto, String authToken) throws Exception;
 
   List<QrResponse> getTableQrList(Long id) throws Exception;
 

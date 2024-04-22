@@ -12,7 +12,6 @@ public class FindCompanyMenuResponse {
     private String title;
     private String description;
     private String header;
-    private String footer;
     private Long companyDataId;
     private Boolean active;
     private Date createdAt;

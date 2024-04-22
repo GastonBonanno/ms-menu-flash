@@ -20,7 +20,6 @@ public class CompanyMenuEntity {
     private String title;
     private String description;
     private String header;
-    private String footer;
     private Boolean active;
 
     @Column(name = "company_data_id")

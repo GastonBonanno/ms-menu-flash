@@ -19,7 +19,6 @@ public class CompanyMenuMapper {
         findCompanyMenuResponse.setTitle(companyMenuEntity.getTitle());
         findCompanyMenuResponse.setDescription(companyMenuEntity.getDescription());
         findCompanyMenuResponse.setHeader(companyMenuEntity.getHeader());
-        findCompanyMenuResponse.setFooter(companyMenuEntity.getFooter());
         findCompanyMenuResponse.setCompanyDataId(companyMenuEntity.getCompanyDataId());
         findCompanyMenuResponse.setActive(companyMenuEntity.getActive());
         findCompanyMenuResponse.setCreatedAt(companyMenuEntity.getCreatedAt());
@@ -35,7 +34,6 @@ public class CompanyMenuMapper {
         createCompanyMenuResponse.setTitle(companyMenuEntity.getTitle());
         createCompanyMenuResponse.setDescription(companyMenuEntity.getDescription());
         createCompanyMenuResponse.setHeader(companyMenuEntity.getHeader());
-        createCompanyMenuResponse.setFooter(companyMenuEntity.getFooter());
         createCompanyMenuResponse.setCompanyDataId(companyMenuEntity.getCompanyDataId());
         createCompanyMenuResponse.setActive(companyMenuEntity.getActive());
         createCompanyMenuResponse.setCreatedAt(companyMenuEntity.getCreatedAt());
@@ -52,7 +50,6 @@ public class CompanyMenuMapper {
         menuEntity.setDescription(companyMenuDto.getDescription());
         menuEntity.setCompanyDataId(companyMenuDto.getCompanyDataId());
         menuEntity.setHeader(companyMenuDto.getHeader());
-        menuEntity.setFooter(companyMenuDto.getFooter());
         menuEntity.setActive(companyMenuDto.getActive());
         menuEntity.setCreatedAt(companyMenuDto.getCreatedAt());
         menuEntity.setModifiedAt(companyMenuDto.getModifiedAt());
@@ -65,7 +62,6 @@ public class CompanyMenuMapper {
         companyMenuEntity.setBranch(Optional.ofNullable(dto.getBranch()).orElse(companyMenuEntity.getBranch()));
         companyMenuEntity.setDescription(Optional.ofNullable(dto.getDescription()).orElse(companyMenuEntity.getDescription()));
         companyMenuEntity.setHeader(Optional.ofNullable(dto.getHeader()).orElse(companyMenuEntity.getHeader()));
-        companyMenuEntity.setFooter(Optional.ofNullable(dto.getFooter()).orElse(companyMenuEntity.getFooter()));
         companyMenuEntity.setCreatedAt(Optional.ofNullable(dto.getCreatedAt()).orElse(companyMenuEntity.getCreatedAt()));
         companyMenuEntity.setModifiedAt(Optional.ofNullable(dto.getModifiedAt()).orElse(companyMenuEntity.getModifiedAt()));
         companyMenuEntity.setDeletedAt(Optional.ofNullable(dto.getDeletedAt()).orElse(companyMenuEntity.getDeletedAt()));

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ClientOrderService {
 
-   List<FindAllClientOrderResponse> findAllByCompanyMenuId(String authToken) throws Exception;
+   List<FindAllClientOrderResponse> findAllByCompanyMenuId(String authToken, Long menuId) throws Exception;
    List<FindAllClientOrderResponse> findAllByClientEmail(String authToken) throws Exception;
 
    void updateOrderState(Long id, String state) throws Exception;

@@ -41,12 +41,14 @@ public class ClientOrderServiceImpl implements ClientOrderService {
     }
 
     @Override
-    public List<FindAllClientOrderResponse> findAllByCompanyMenuId(String authToken) throws Exception {
+    public List<FindAllClientOrderResponse> findAllByCompanyMenuId(String authToken, Long menuId) throws Exception {
         try {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
             ClientUserEntity clientUserEntity = userRepository.findByEmail(loggedUser.getEmail());
             List<ClientOrderEntity> clientOrderEntityList = clientOrderRepository
-                    .findByCompanyMenuIdAndActiveOrderByCreatedAtDesc(clientUserEntity.getCompanyDataEntity().getId(), Boolean.TRUE);
+                    .findByCompanyMenuIdAndActiveAndCompanyMenuIdOrderByCreatedAtDesc(clientUserEntity.getCompanyDataEntity().getId(),
+                            Boolean.TRUE,
+                            menuId);
             return clientOrderEntityList.stream().map(ClientOrderMapper::entityToResponse).collect(Collectors.toList());
         } catch (Exception e) {
             LOG.error("findAllByCompanyMenuId error: {}", e.getMessage());

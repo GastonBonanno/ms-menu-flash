@@ -23,10 +23,10 @@ public class OrderController {
         this.clientOrderService = clientOrderService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<FindAllClientOrderResponse>> findAll(@RequestHeader("auth-token") String authToken) throws Exception {
+    @GetMapping(value = "/branch/{menuId}")
+    public ResponseEntity<List<FindAllClientOrderResponse>> findAll(@RequestHeader("auth-token") String authToken, @PathVariable Long menuId) throws Exception {
         LOG.info("findAll begins");
-        List<FindAllClientOrderResponse> clientOrderResponse= clientOrderService.findAllByCompanyMenuId(authToken);
+        List<FindAllClientOrderResponse> clientOrderResponse= clientOrderService.findAllByCompanyMenuId(authToken, menuId);
         LOG.info("finished");
         return new ResponseEntity<>(clientOrderResponse,HttpStatus.OK);
     }

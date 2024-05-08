@@ -11,6 +11,7 @@ import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.CompanyMenuMapper;
 import com.project.menuflash.repository.CompanyDataRepository;
 import com.project.menuflash.repository.CompanyMenuRepository;
+import com.project.menuflash.util.DatesUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -63,7 +64,7 @@ public class CompanyMenuServiceImpl implements CompanyMenuService {
         try {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
             companyMenuDto.setActive(Boolean.TRUE);
-            companyMenuDto.setCreatedAt(new Date());
+            companyMenuDto.setCreatedAt(DatesUtil.getTodayUtcArg());
             companyMenuDto.setCompanyDataId(loggedUser.getId());
             CompanyMenuEntity companyMenuEntity = companyMenuRepository.save(CompanyMenuMapper.dtoToEntity(companyMenuDto));
             return CompanyMenuMapper.entityToResponse(companyMenuEntity);

@@ -8,20 +8,18 @@ import com.project.menuflash.dto.response.CompanyDataResponse;
 import com.project.menuflash.dto.response.LoginUserResponse;
 import com.project.menuflash.entity.ClientUserEntity;
 import com.project.menuflash.entity.CompanyDataEntity;
-import com.project.menuflash.entity.ItemMenuEntity;
 import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.CompanyDataMapper;
-import com.project.menuflash.mapper.ItemMenuMapper;
 import com.project.menuflash.mapper.UserMapper;
 import com.project.menuflash.repository.CompanyDataRepository;
 import com.project.menuflash.repository.UserRepository;
+import com.project.menuflash.util.DatesUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.SecureRandom;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -85,11 +83,11 @@ public class UserServiceImpl implements UserService {
             registerUserDto.setPassword(passEncrypted);
             ClientUserEntity clientUser = UserMapper.dtoToEntity(registerUserDto);
             clientUser.setActive(Boolean.TRUE);
-            clientUser.setCreatedAt(new Date());
+            clientUser.setCreatedAt(DatesUtil.getTodayUtcArg());
             ClientUserEntity clientUserSaved = userRepository.save(clientUser);
             CompanyDataEntity companyDataEntity = new CompanyDataEntity();
             companyDataEntity.setActive(Boolean.TRUE);
-            companyDataEntity.setCreatedAt(new Date());
+            companyDataEntity.setCreatedAt(DatesUtil.getTodayUtcArg());
             companyDataEntity.setClientUserEntity(clientUserSaved);
             companyDataRepository.save(companyDataEntity);
         } catch (Exception e) {
@@ -117,7 +115,7 @@ public class UserServiceImpl implements UserService {
         try {
             Long id = tokenService.getUserFromToken(authToken).getId();
             CompanyDataEntity companyDataEntity = getCompanyDataEntityById(id);
-            companyDataEntity.setModifiedAt(new Date());
+            companyDataEntity.setModifiedAt(DatesUtil.getTodayUtcArg());
             companyDataRepository.save(CompanyDataMapper.updateDtoToEntity(updateCompanyDataDto,companyDataEntity));
         } catch (Exception e) {
             LOG.error("updateState error: {}", e.getMessage());

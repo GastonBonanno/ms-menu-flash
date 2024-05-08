@@ -7,6 +7,7 @@ import com.project.menuflash.dto.response.ItemMenuResponse;
 import com.project.menuflash.entity.ItemMenuEntity;
 import com.project.menuflash.mapper.ItemMenuMapper;
 import com.project.menuflash.repository.ItemMenuRepository;
+import com.project.menuflash.util.DatesUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -28,7 +29,7 @@ public class ItemMenuServiceImpl implements ItemMenuService {
     public ItemMenuResponse createItemMenu(CreateItemMenuDto itemMenuDto) throws Exception {
         try {
             itemMenuDto.setActive(Boolean.TRUE);
-            itemMenuDto.setCreatedAt(new Date());
+            itemMenuDto.setCreatedAt(DatesUtil.getTodayUtcArg());
             ItemMenuEntity itemMenuEntity = itemMenuRepository.save(ItemMenuMapper.dtoToEntity(itemMenuDto));
             return ItemMenuMapper.entityToResponse(itemMenuEntity);
         } catch (Exception e) {

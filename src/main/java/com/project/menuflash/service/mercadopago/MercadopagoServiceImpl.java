@@ -59,9 +59,8 @@ public class MercadopagoServiceImpl implements MercadopagoService {
                 .build();
 
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-//                .success("http://localhost:8100/afterPayment?orderId="+orderId)
-//                .failure("http://localhost:8100/scanQr")
-//                .pending("http://localhost:8100/scanQr")
+                .failure("https://master--menuflash.netlify.app")
+                .pending("https://master--menuflash.netlify.app")
                 .success("https://master--menuflash.netlify.app?orderId="+orderId)
                 .build();
 

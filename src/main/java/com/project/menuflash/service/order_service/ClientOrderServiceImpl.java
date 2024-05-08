@@ -1,23 +1,29 @@
 package com.project.menuflash.service.order_service;
 
 import com.project.menuflash.controller.StateController;
-import com.project.menuflash.dto.request.*;
+import com.project.menuflash.dto.request.ClientOrderItemDto;
+import com.project.menuflash.dto.request.CreateOrderDto;
 import com.project.menuflash.dto.response.FindAllClientOrderResponse;
-import com.project.menuflash.dto.response.ItemMenuResponse;
 import com.project.menuflash.dto.response.LoggedUser;
-import com.project.menuflash.entity.*;
+import com.project.menuflash.entity.ClientOrderEntity;
+import com.project.menuflash.entity.ClientOrderItemEntity;
+import com.project.menuflash.entity.ClientUserEntity;
+import com.project.menuflash.entity.StateEntity;
 import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.ClientOrderMapper;
-import com.project.menuflash.mapper.ItemMenuMapper;
-import com.project.menuflash.mapper.QrMapper;
-import com.project.menuflash.repository.*;
-import com.project.menuflash.service.item_menu.ItemMenuService;
+import com.project.menuflash.repository.ClientOrderItemRepository;
+import com.project.menuflash.repository.ClientOrderRepository;
+import com.project.menuflash.repository.StateRepository;
+import com.project.menuflash.repository.UserRepository;
+import com.project.menuflash.util.DatesUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.swing.text.html.Option;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
@@ -101,7 +107,7 @@ public class ClientOrderServiceImpl implements ClientOrderService {
             StateEntity state = stateRepository.findByName("PENDIENTE");
             orderEntity.setStateEntity(state);
             orderEntity.setActive(Boolean.FALSE);
-            orderEntity.setCreatedAt(new Date());
+            orderEntity.setCreatedAt(DatesUtil.getTodayUtcArg());
             orderEntity.setClientOrderItemEntityList(new ArrayList<>());
             ClientOrderEntity newOrder = clientOrderRepository.save(orderEntity);
             createOrderItemList(newOrder, createOrderDto);

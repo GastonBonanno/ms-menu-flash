@@ -3,17 +3,16 @@ package com.project.menuflash.service.qr;
 import com.project.menuflash.controller.StateController;
 import com.project.menuflash.dto.request.CreateQrDto;
 import com.project.menuflash.dto.response.QrResponse;
-import com.project.menuflash.entity.CompanyDataEntity;
 import com.project.menuflash.entity.QrEntity;
 import com.project.menuflash.jwt.TokenService;
 import com.project.menuflash.mapper.QrMapper;
 import com.project.menuflash.repository.CompanyDataRepository;
 import com.project.menuflash.repository.QrRepository;
+import com.project.menuflash.util.DatesUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +40,7 @@ public class QrServiceImpl implements QrService {
                 dto.setCompanyId(companyDataEntity.getId());
                 QrEntity entity = QrMapper.dtoToEntity(dto);
                 entity.setActive(Boolean.TRUE);
-                entity.setCreatedAt(new Date());
+                entity.setCreatedAt(DatesUtil.getTodayUtcArg());
                 return entity;
             }).collect(Collectors.toList());
             qrRepository.saveAll(qrEntity);

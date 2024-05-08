@@ -62,7 +62,7 @@ public class MercadopagoServiceImpl implements MercadopagoService {
 //                .success("http://localhost:8100/afterPayment?orderId="+orderId)
 //                .failure("http://localhost:8100/scanQr")
 //                .pending("http://localhost:8100/scanQr")
-                .success("https://localhost/home?orderId="+orderId)
+                .success("https://master--menuflash.netlify.app?orderId="+orderId)
                 .build();
 
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()

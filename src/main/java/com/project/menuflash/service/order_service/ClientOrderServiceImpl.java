@@ -50,7 +50,7 @@ public class ClientOrderServiceImpl implements ClientOrderService {
     public List<FindAllClientOrderResponse> findAllByCompanyMenuId(String authToken, Long menuId) throws Exception {
         try {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
-            ClientUserEntity clientUserEntity = userRepository.findByEmail(loggedUser.getEmail());
+            ClientUserEntity clientUserEntity = userRepository.findByEmailOrderById(loggedUser.getEmail());
             List<ClientOrderEntity> clientOrderEntityList = clientOrderRepository
                     .findByCompanyMenuIdAndActiveAndCompanyMenuIdOrderByCreatedAtDesc(clientUserEntity.getCompanyDataEntity().getId(),
                             Boolean.TRUE,
@@ -66,7 +66,7 @@ public class ClientOrderServiceImpl implements ClientOrderService {
     public List<FindAllClientOrderResponse> findAllByClientEmail(String authToken) throws Exception {
         try {
             LoggedUser loggedUser = tokenService.getUserFromToken(authToken);
-            ClientUserEntity clientUserEntity = userRepository.findByEmail(loggedUser.getEmail());
+            ClientUserEntity clientUserEntity = userRepository.findByEmailOrderById(loggedUser.getEmail());
             List<ClientOrderEntity> clientOrderEntityList = clientOrderRepository.findByClientEmailAndActiveOrderByCreatedAtDesc(clientUserEntity.getEmail(), Boolean.TRUE);
             return clientOrderEntityList.stream().map(ClientOrderMapper::entityToResponse).collect(Collectors.toList());
         } catch (Exception e) {

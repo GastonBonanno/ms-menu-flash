@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ClientOrderRepository extends JpaRepository<ClientOrderEntity, Long> {
 
-    List<ClientOrderEntity> findByCompanyMenuIdAndActiveAndCompanyMenuIdOrderByCreatedAtDesc(Long companyMenuId, boolean active, Long menuId);
-    List<ClientOrderEntity> findByClientEmailAndActiveOrderByCreatedAtDesc(String clientEmail, boolean active);
+    List<ClientOrderEntity> findByCompanyMenuIdAndActiveAndCompanyMenuIdOrderByIdDesc(Long companyMenuId, boolean active, Long menuId);
+    List<ClientOrderEntity> findByClientEmailAndActiveOrderByIdDesc(String clientEmail, boolean active);
 }
